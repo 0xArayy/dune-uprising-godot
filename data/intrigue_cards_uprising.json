@@ -1,0 +1,68 @@
+[
+  {
+    "id": "intrigue_plot_desert_alliance",
+    "name": "Desert Alliance",
+    "intrigueType": "plot",
+    "playEffect": [
+      { "type": "gain_resource", "resource": "spice", "amount": 1 }
+    ]
+  },
+  {
+    "id": "intrigue_plot_imperial_favor",
+    "name": "Imperial Favor",
+    "intrigueType": "plot",
+    "playEffect": [
+      { "type": "gain_resource", "resource": "solari", "amount": 2 }
+    ]
+  },
+  {
+    "id": "intrigue_combat_blade_in_the_dark",
+    "name": "Blade in the Dark",
+    "intrigueType": "combat",
+    "playEffect": [
+      { "type": "gain_sword", "amount": 2 }
+    ]
+  },
+  {
+    "id": "intrigue_combat_water_of_life",
+    "name": "Water of Life",
+    "intrigueType": "combat",
+    "playEffect": [
+      { "type": "recruit_troops", "amount": 1 }
+    ]
+  },
+  {
+    "id": "intrigue_endgame_calculated_risk",
+    "name": "Calculated Risk",
+    "intrigueType": "endgame",
+    "playEffect": [
+      { "type": "vp", "amount": 1 }
+    ]
+  },
+  {
+    "id": "intrigue_plot_secret_meeting",
+    "name": "Secret Meeting",
+    "intrigueType": "plot",
+    "playEffect": [
+      { "type": "gain_persuasion", "amount": 2 }
+    ]
+  },
+  {
+    "id": "intrigue_combat_sand_riders",
+    "name": "Sand Riders",
+    "intrigueType": "combat",
+    "playEffect": [
+      { "type": "gain_sword", "amount": 1 },
+      { "type": "gain_resource", "resource": "spice", "amount": 1 }
+    ]
+  },
+  {
+    "id": "intrigue_win_conflict_immediate_sample",
+    "name": "Victor's Gambit",
+    "intrigueType": "combat",
+    "immediateOnConflictWinReward": true,
+    "playEffect": [
+      { "type": "draw_cards", "amount": 1 }
+    ]
+  }
+]

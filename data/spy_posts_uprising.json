@@ -1,0 +1,18 @@
+[
+  { "id": "post_deep_desert", "connectedSpaces": ["deep_desert"] },
+  { "id": "post_hagga_basin", "connectedSpaces": ["hagga_basin"] },
+  { "id": "post_imperial_basin", "connectedSpaces": ["imperial_basin"] },
+
+  { "id": "post_accept_contract_shipping", "connectedSpaces": ["accept_contract", "shipping"] },
+  { "id": "post_swordmaster_imperial_privilege_high_council", "connectedSpaces": ["swordmaster", "imperial_privilege", "high_council"] },
+  { "id": "post_spice_refinery_arrakeen", "connectedSpaces": ["spice_refinery", "arrakeen"] },
+  { "id": "post_spice_refinery_research_station", "connectedSpaces": ["spice_refinery", "research_station"] },
+  { "id": "post_research_station_sietch_tabr", "connectedSpaces": ["research_station", "sietch_tabr"] },
+  { "id": "post_assembly_hall_gather_support", "connectedSpaces": ["assembly_hall", "gather_support"] },
+
+  { "id": "post_dutiful_service_sardaukar", "connectedSpaces": ["dutiful_service", "sardaukar"] },
+  { "id": "post_deliver_supplies_heighliner", "connectedSpaces": ["deliver_supplies", "heighliner"] },
+  { "id": "post_espionage_secrets", "connectedSpaces": ["espionage", "secrets"] },
+  { "id": "post_desert_tactics_fremkit", "connectedSpaces": ["desert_tactics", "fremkit"] }
+]
+

@@ -1,0 +1,718 @@
+[
+  {
+    "id": "base_conflict_i_skirmish_desert_mouse",
+    "name": "Skirmish",
+    "level": "I",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "desert_mouse"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 3
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_i_skirmish_crysknife_a",
+    "name": "Skirmish",
+    "level": "I",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "crysknife"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_influence",
+        "faction": "anyone",
+        "amount": 1
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_i_skirmish_ornithopter",
+    "name": "Skirmish",
+    "level": "I",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "ornithopter"
+    ],
+    "firstReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 1
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_ii_sietch_defense",
+    "name": "Sietch Defense",
+    "level": "II",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "desert_mouse"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_influence",
+        "faction": "fremen",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 3
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_ii_imperial_basin_guard",
+    "name": "Imperial Basin Guard",
+    "level": "II",
+    "shieldWallProtected": true,
+    "sandwormPolicy": "blocked_by_shield_wall",
+    "battleIcons": [
+      "desert_mouse"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_control",
+        "boardSpaceId": "imperial_basin"
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 2
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 2
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_i_trade_dispute",
+    "name": "Trade Dispute",
+    "level": "II",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "desert_mouse"
+    ],
+    "firstReward": [
+      {
+        "type": "get_contract",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "trash_card",
+        "amount": 1
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      },
+      {
+        "type": "trash_card",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_i_backroom_dealings",
+    "name": "Backroom Dealings",
+    "level": "II",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "ornithopter"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_influence",
+        "faction": "beneGesserit",
+        "amount": 1
+      },
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_i_trial_of_loyalty",
+    "name": "Trial of Loyalty",
+    "level": "II",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "ornithopter"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_influence",
+        "faction": "emperor",
+        "amount": 1
+      },
+      {
+        "type": "place_spy",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 4
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_i_security_detail",
+    "name": "Security Detail",
+    "level": "II",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "crysknife"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_influence",
+        "faction": "guild",
+        "amount": 1
+      },
+      {
+        "type": "get_contract",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 2
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_i_spice_shipment",
+    "name": "Spice Shipment",
+    "level": "II",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [],
+    "firstReward": [
+      {
+        "type": "gain_influence",
+        "faction": "anyone",
+        "amount": 1
+      },
+      {
+        "type": "cost",
+        "resource": "spice",
+        "amount": 3,
+        "effect": {
+          "type": "vp",
+          "amount": 1
+        }
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_ii_siege_of_arrakeen",
+    "name": "Siege of Arrakeen",
+    "level": "II",
+    "shieldWallProtected": true,
+    "sandwormPolicy": "blocked_by_shield_wall",
+    "battleIcons": [
+      "ornithopter"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_control",
+        "boardSpaceId": "arrakeen"
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 2
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 4
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_ii_spice_warehouse_raid",
+    "name": "Spice Warehouse Raid",
+    "level": "II",
+    "shieldWallProtected": true,
+    "sandwormPolicy": "blocked_by_shield_wall",
+    "battleIcons": [],
+    "firstReward": [
+      {
+        "type": "gain_control",
+        "boardSpaceId": "spice_refinery"
+      },
+      {
+        "type": "place_spy",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 2
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_ii_battle_for_arrakeen",
+    "name": "Battle for Arrakeen",
+    "level": "III",
+    "shieldWallProtected": true,
+    "sandwormPolicy": "blocked_by_shield_wall",
+    "battleIcons": [
+      "crysknife"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_control",
+        "boardSpaceId": "arrakeen"
+      },
+      {
+        "type": "vp",
+        "amount": 1
+      },
+      {
+        "type": "cost",
+        "resource": "recall_spy",
+        "amount": 2,
+        "effect": {
+          "type": "vp",
+          "amount": 1
+        }
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 3
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 2
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_ii_battle_for_imperial_basin",
+    "name": "Battle for Imperial Basin",
+    "level": "III",
+    "shieldWallProtected": true,
+    "sandwormPolicy": "blocked_by_shield_wall",
+    "battleIcons": [
+      "ornithopter"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_control",
+        "boardSpaceId": "imperial_basin"
+      },
+      {
+        "type": "vp",
+        "amount": 1
+      },
+      {
+        "type": "cost",
+        "resource": "spice",
+        "amount": 4,
+        "effect": {
+          "type": "vp",
+          "amount": 1
+        }
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 5
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_ii_battle_for_spice_refinery",
+    "name": "Battle for Spice Refinery",
+    "level": "III",
+    "shieldWallProtected": true,
+    "sandwormPolicy": "blocked_by_shield_wall",
+    "battleIcons": [
+      "desert_mouse"
+    ],
+    "firstReward": [
+      {
+        "type": "vp",
+        "amount": 1
+      },
+      {
+        "type": "gain_control",
+        "boardSpaceId": "spice_refinery"
+      },
+      {
+        "type": "cost",
+        "resource": "solari",
+        "amount": 6,
+        "effect": {
+          "type": "vp",
+          "amount": 1
+        }
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 3
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "id": "base_conflict_i_propaganda",
+    "name": "Propaganda",
+    "level": "III",
+    "shieldWallProtected": false,
+    "sandwormPolicy": "always_allowed",
+    "battleIcons": [
+      "wild"
+    ],
+    "firstReward": [
+      {
+        "type": "gain_influence",
+        "faction": "choose_two",
+        "factions": [
+          "guild",
+          "fremen",
+          "beneGesserit",
+          "emperor"
+        ],
+        "amount": 1
+      }
+    ],
+    "secondReward": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 3
+      }
+    ],
+    "thirdReward": [
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 3
+      }
+    ]
+  }
+]

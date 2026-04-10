@@ -1,0 +1,428 @@
+[
+  {
+	"id": "accept_contract",
+	"name": "Accept Contract",
+	"area": "spice",
+	"requiredAgentIcons": ["spice"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  { "type": "draw_cards", "amount": 1 },
+	  {
+		"type": "get_contract",
+		"amount": 1,
+		"fallbackEffects": [
+		  { "type": "gain_resource", "resource": "solari", "amount": 2 }
+		]
+	  }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "arrakeen",
+	"name": "Arrakeen",
+	"area": "city",
+	"requiredAgentIcons": ["city"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  { "type": "recruit_troops", "amount": 1 },
+	  { "type": "draw_cards", "amount": 1 }
+	],
+	"isConflictSpace": true,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "assembly_hall",
+	"name": "Assembly Hall",
+	"area": "landsraad",
+	"requiredAgentIcons": ["landsraad"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  { "type": "draw_intrigue", "amount": 1 },
+	  { "type": "gain_persuasion", "amount": 1 }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "deep_desert",
+	"name": "Deep Desert",
+	"area": "spice",
+	"requiredAgentIcons": ["spice"],
+	"cost": [{ "type": "resource", "resource": "water", "amount": 3 }],
+	"requirements": [],
+	"effects": [
+	  { "type": "collect_maker_spice", "boardSpaceId": "deep_desert" },
+	  {
+		"type": "choice",
+		"options": [
+		  { "label": "gain spice", "effects": [{ "type": "gain_resource", "resource": "spice", "amount": 4 }] },
+		  {
+			"label": "summon sandworms (requires maker hooks)",
+			"effects": [
+			  {
+				"type": "if",
+				"requirement": { "type": "has_maker_hooks", "value": true },
+				"then": [{ "type": "summon_sandworm", "amount": 2 }],
+				"else": []
+			  }
+			]
+		  }
+		]
+	  }
+	],
+	"isConflictSpace": true,
+	"makerSpace": true,
+	"makerBaseSpice": 4,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "deliver_supplies",
+	"name": "Deliver Supplies",
+	"area": "guild",
+	"requiredAgentIcons": ["guild"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_influence", "faction": "guild", "amount": 1 },
+	  { "type": "gain_resource", "resource": "water", "amount": 1 }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "desert_tactics",
+	"name": "Desert Tactics",
+	"area": "fremen",
+	"requiredAgentIcons": ["fremen"],
+	"cost": [{ "type": "resource", "resource": "water", "amount": 1 }],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_influence", "faction": "fremen", "amount": 1 },
+	  { "type": "recruit_troops", "amount": 1 },
+	  { "type": "trash_card", "from": "hand", "amount": 1 }
+	],
+	"isConflictSpace": true,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "dutiful_service",
+	"name": "Dutiful Service",
+	"area": "emperor",
+	"requiredAgentIcons": ["emperor"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_influence", "faction": "emperor", "amount": 1 },
+	  {
+		"type": "get_contract",
+		"amount": 1,
+		"fallbackEffects": [
+		  { "type": "gain_resource", "resource": "solari", "amount": 2 }
+		]
+	  }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "espionage",
+	"name": "Espionage",
+	"area": "beneGesserit",
+	"requiredAgentIcons": ["beneGesserit"],
+	"cost": [{ "type": "resource", "resource": "spice", "amount": 1 }],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_influence", "faction": "beneGesserit", "amount": 1 },
+	  { "type": "draw_cards", "amount": 1 },
+	  { "type": "place_spy", "amount": 1 }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "fremkit",
+	"name": "Fremkit",
+	"area": "fremen",
+	"requiredAgentIcons": ["fremen"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_influence", "faction": "fremen", "amount": 1 },
+	  { "type": "draw_cards", "amount": 1 }
+	],
+	"isConflictSpace": true,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "gather_support",
+	"name": "Gather Support",
+	"area": "landsraad",
+	"requiredAgentIcons": ["landsraad"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  {
+		"type": "choice",
+		"options": [
+		  { "label": "pay 0 solari", "effects": [{ "type": "recruit_troops", "amount": 2 }] },
+		  {
+			"label": "pay 2 solari",
+			"effects": [
+			  { "type": "spend_resource", "resource": "solari", "amount": 2 },
+			  { "type": "recruit_troops", "amount": 2 },
+			  { "type": "gain_resource", "resource": "water", "amount": 1 }
+			]
+		  }
+		]
+	  }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "hagga_basin",
+	"name": "Hagga Basin",
+	"area": "spice",
+	"requiredAgentIcons": ["spice"],
+	"cost": [{ "type": "resource", "resource": "water", "amount": 1 }],
+	"requirements": [],
+	"effects": [
+	  { "type": "collect_maker_spice", "boardSpaceId": "hagga_basin" },
+	  {
+		"type": "choice",
+		"options": [
+		  { "label": "gain spice", "effects": [{ "type": "gain_resource", "resource": "spice", "amount": 2 }] },
+		  {
+			"label": "summon sandworm (requires maker hooks)",
+			"effects": [
+			  {
+				"type": "if",
+				"requirement": { "type": "has_maker_hooks", "value": true },
+				"then": [{ "type": "summon_sandworm", "amount": 1 }],
+				"else": []
+			  }
+			]
+		  }
+		]
+	  }
+	],
+	"isConflictSpace": true,
+	"makerSpace": true,
+	"makerBaseSpice": 2,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "heighliner",
+	"name": "Heighliner",
+	"area": "guild",
+	"requiredAgentIcons": ["guild"],
+	"cost": [{ "type": "resource", "resource": "spice", "amount": 5 }],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_influence", "faction": "guild", "amount": 1 },
+	  { "type": "recruit_troops", "amount": 5 }
+	],
+	"isConflictSpace": true,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "high_council",
+	"name": "High Council",
+	"area": "landsraad",
+	"requiredAgentIcons": ["landsraad"],
+	"cost": [{ "type": "resource", "resource": "solari", "amount": 5 }],
+	"requirements": [],
+	"effects": [
+	  {
+		"type": "if",
+		"requirement": { "type": "flag", "key": "has_high_council_seat", "value": false },
+		"then": [{ "type": "set_flag", "key": "has_high_council_seat", "value": true }],
+		"else": [
+		  { "type": "gain_resource", "resource": "spice", "amount": 2 },
+		  { "type": "draw_intrigue", "amount": 1 },
+		  { "type": "recruit_troops", "amount": 3 }
+		]
+	  }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "imperial_basin",
+	"name": "Imperial Basin",
+	"area": "spice",
+	"requiredAgentIcons": ["spice"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_resource", "resource": "spice", "amount": 1 },
+	  { "type": "collect_maker_spice", "boardSpaceId": "imperial_basin" }
+	],
+	"isConflictSpace": true,
+	"makerSpace": true,
+	"makerBaseSpice": 1,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "imperial_privilege",
+	"name": "Imperial Privilege",
+	"area": "landsraad",
+	"requiredAgentIcons": ["landsraad"],
+	"cost": [{ "type": "resource", "resource": "solari", "amount": 3 }],
+	"requirements": [{ "type": "min_influence", "faction": "emperor", "value": 2 }],
+	"effects": [
+	  { "type": "recall_agent", "amount": 1, "excludeJustPlaced": true },
+	  { "type": "draw_cards", "amount": 1 }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "research_station",
+	"name": "Research Station",
+	"area": "city",
+	"requiredAgentIcons": ["city"],
+	"cost": [{ "type": "resource", "resource": "water", "amount": 2 }],
+	"requirements": [],
+	"effects": [
+	  { "type": "recruit_troops", "amount": 2 },
+	  { "type": "draw_cards", "amount": 2 }
+	],
+	"isConflictSpace": true,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "sardaukar",
+	"name": "Sardaukar",
+	"area": "emperor",
+	"requiredAgentIcons": ["emperor"],
+	"cost": [{ "type": "resource", "resource": "spice", "amount": 4 }],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_influence", "faction": "emperor", "amount": 1 },
+	  { "type": "draw_intrigue", "amount": 1 },
+	  { "type": "recruit_troops", "amount": 4 }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "secrets",
+	"name": "Secrets",
+	"area": "beneGesserit",
+	"requiredAgentIcons": ["beneGesserit"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  { "type": "gain_influence", "faction": "beneGesserit", "amount": 1 },
+	  { "type": "draw_intrigue", "amount": 1 }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "shipping",
+	"name": "Shipping",
+	"area": "spice",
+	"requiredAgentIcons": ["spice"],
+	"cost": [{ "type": "resource", "resource": "spice", "amount": 3 }],
+	"requirements": [{ "type": "min_influence", "faction": "guild", "value": 2 }],
+	"effects": [
+	  { "type": "gain_resource", "resource": "solari", "amount": 5 },
+	  { "type": "gain_influence", "faction": "anyone", "amount": 1 }
+	],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "sietch_tabr",
+	"name": "Sietch Tabr",
+	"area": "city",
+	"requiredAgentIcons": ["city"],
+	"cost": [],
+	"requirements": [{ "type": "min_influence", "faction": "fremen", "value": 2 }],
+	"effects": [
+	  {
+		"type": "choice",
+		"options": [
+		  {
+			"label": "take maker hooks + recruit + water",
+			"effects": [
+			  { "type": "gain_maker_hooks", "amount": 1, "ifAlreadyHas": "still_apply_other_effects" },
+			  { "type": "recruit_troops", "amount": 1 },
+			  { "type": "gain_resource", "resource": "water", "amount": 1 }
+			]
+		  },
+		  {
+			"label": "water + remove shield wall",
+			"effects": [
+			  { "type": "gain_resource", "resource": "water", "amount": 1 },
+			  { "type": "remove_shield_wall", "amount": 1 }
+			]
+		  }
+		]
+	  }
+	],
+	"isConflictSpace": true,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "spice_refinery",
+	"name": "Spice Refinery",
+	"area": "city",
+	"requiredAgentIcons": ["city"],
+	"cost": [],
+	"requirements": [],
+	"effects": [
+	  {
+		"type": "choice",
+		"options": [
+		  { "label": "pay 0 spice", "effects": [{ "type": "gain_resource", "resource": "solari", "amount": 2 }] },
+		  {
+			"label": "pay 1 spice",
+			"effects": [
+			  { "type": "spend_resource", "resource": "spice", "amount": 1 },
+			  { "type": "gain_resource", "resource": "solari", "amount": 4 }
+			]
+		  }
+		]
+	  }
+	],
+	"isConflictSpace": true,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  },
+  {
+	"id": "swordmaster",
+	"name": "Swordmaster",
+	"area": "landsraad",
+	"requiredAgentIcons": ["landsraad"],
+	"cost": [{ "type": "resource", "resource": "solari", "amount": 8 }],
+	"requirements": [],
+	"effects": [{ "type": "gain_agent", "which": "swordmaster", "amount": 1 }],
+	"isConflictSpace": false,
+	"makerSpace": false,
+	"maxOccupancy": 1
+  }
+]

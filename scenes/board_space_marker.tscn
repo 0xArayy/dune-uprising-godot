@@ -1,0 +1,1119 @@
+[gd_scene load_steps=22 format=3 uid="uid://board_space_marker"]
+[ext_resource type="Script" path="res://scripts/board_space_marker.gd" id="1"]
+[ext_resource type="Texture2D" path="res://data/icons/influence.png" id="2"]
+[ext_resource type="Texture2D" path="res://data/icons/solari.png" id="3"]
+[ext_resource type="Texture2D" path="res://data/icons/resource_spice.png" id="4"]
+[ext_resource type="Texture2D" path="res://data/icons/contract.png" id="5"]
+[ext_resource type="Texture2D" path="res://data/icons/water.png" id="6"]
+[ext_resource type="Texture2D" path="res://data/icons/arrow_right.png" id="7"]
+[ext_resource type="Texture2D" path="res://data/icons/draw_card.png" id="8"]
+[ext_resource type="Texture2D" path="res://data/icons/troops.png" id="9"]
+[ext_resource type="Texture2D" path="res://data/icons/intrigue.png" id="10"]
+[ext_resource type="Texture2D" path="res://data/icons/trash_card.png" id="11"]
+[ext_resource type="Texture2D" path="res://data/icons/maker.png" id="12"]
+[ext_resource type="Texture2D" path="res://data/icons/maker_hooks.png" id="13"]
+[ext_resource type="Texture2D" path="res://data/icons/high_council.png" id="14"]
+[ext_resource type="Texture2D" path="res://data/icons/sand_worm.png" id="15"]
+[ext_resource type="Texture2D" path="res://data/icons/shield_wall.png" id="16"]
+[ext_resource type="Texture2D" path="res://data/icons/spy.png" id="17"]
+[ext_resource type="Texture2D" path="res://data/icons/recall_agent.png" id="18"]
+[ext_resource type="Texture2D" path="res://data/icons/get_agent.png" id="19"]
+[ext_resource type="Texture2D" path="res://data/icons/persuasion.png" id="20"]
+[ext_resource type="Texture2D" path="res://data/icons/agent.png" id="21"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_outer"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.74, 0.78, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inner"]
+bg_color = Color(0.18, 0.19, 0.22, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9, 0.92, 0.95, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_effect_block"]
+bg_color = Color(0.11, 0.12, 0.14, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.68, 0.71, 0.75, 0.8)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="BoardSpaceMarker" type="Node2D"]
+script = ExtResource("1")
+board_space_id = "board_space_1"
+slot_size = Vector2(220, 110)
+
+[node name="RootFrame" type="PanelContainer" parent="."]
+offset_left = -110.0
+offset_top = -55.0
+offset_right = 110.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_outer")
+
+[node name="InnerFrame" type="PanelContainer" parent="RootFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inner")
+
+[node name="ContentMargin" type="MarginContainer" parent="RootFrame/InnerFrame"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ContentRow" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LeftContent" type="VBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="NameLabel" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Board space"
+horizontal_alignment = 0
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.9, 0.92, 0.95, 1)
+
+[node name="CostIconsRow" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SolariBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow/SolariBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow/SolariBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="SpiceBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow/SpiceBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow/SpiceBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="WaterBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow/WaterBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent/CostIconsRow/WaterBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="OccupantAgentIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent"]
+visible = false
+custom_minimum_size = Vector2(33, 45)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("21")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 1, 1, 1)
+
+[node name="AreaLabel" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/LeftContent"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "area"
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.67, 0.72, 0.78, 1)
+
+[node name="EffectsBlock" type="PanelContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow"]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_effect_block")
+
+[node name="EffectsMargin" type="MarginContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="EffectsVBox" type="VBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HighCouncilFirstRow" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="FirstPrefixLabel" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/HighCouncilFirstRow"]
+layout_mode = 2
+text = "1st:"
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.88, 0.9, 0.93, 1)
+
+[node name="HighCouncilSeatIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/HighCouncilFirstRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("14")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HighCouncilSecondPrefix" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+visible = false
+layout_mode = 2
+text = "2nd+:"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 10
+theme_override_colors/font_color = Color(0.52, 0.55, 0.6, 1)
+
+[node name="EffectIconsRow" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="InfluenceIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SolariBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/SolariBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/SolariBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="PersuasionBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/PersuasionBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/PersuasionBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="SpiceBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/SpiceBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/SpiceBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="ContractIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+custom_minimum_size = Vector2(102, 34)
+layout_mode = 2
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpyIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TemplateIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/SpyIcons"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("17")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RecallAgentIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TemplateIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/RecallAgentIcons"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("18")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GetAgentIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TemplateIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/GetAgentIcons"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("19")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DrawCardsIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TemplateIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/DrawCardsIcons"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IntrigueIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TemplateIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/IntrigueIcons"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("10")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TrashCardIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TemplateIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/TrashCardIcons"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("11")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MakerHooksIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TemplateIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/MakerHooksIcons"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("13")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WaterBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/WaterBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/WaterBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="TroopsBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/TroopsBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/EffectIconsRow/TroopsBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="MakerSpiceRow" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="BaseSpiceBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerSpiceRow"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerSpiceRow/BaseSpiceBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerSpiceRow/BaseSpiceBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="PlusLabel" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerSpiceRow"]
+layout_mode = 2
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.88, 0.9, 0.93, 1)
+
+[node name="MakerIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerSpiceRow"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("12")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PoolSpiceBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerSpiceRow"]
+visible = false
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerSpiceRow/PoolSpiceBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerSpiceRow/PoolSpiceBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="SpiceRefineryTradeBox" type="VBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="RowZero" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpiceBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowZero"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowZero/SpiceBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowZero/SpiceBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="Arrow" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowZero"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SolariBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowZero"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowZero/SolariBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowZero/SolariBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="RowOne" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpiceBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowOne"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowOne/SpiceBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowOne/SpiceBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="Arrow" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowOne"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SolariBadge" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowOne"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowOne/SolariBadge"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SpiceRefineryTradeBox/RowOne/SolariBadge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="GatherSupportTradeBox" type="VBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="GsRowZero" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SolariCost" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowZero"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowZero/SolariCost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowZero/SolariCost"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="Arrow" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowZero"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TroopsGain" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowZero"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowZero/TroopsGain"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowZero/TroopsGain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="GsRowOne" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SolariCost" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne/SolariCost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne/SolariCost"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="Arrow" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GsRowOneRight" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TroopsGain" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne/GsRowOneRight"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne/GsRowOneRight/TroopsGain"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne/GsRowOneRight/TroopsGain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="WaterGain" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne/GsRowOneRight"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne/GsRowOneRight/WaterGain"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/GatherSupportTradeBox/GsRowOne/GsRowOneRight/WaterGain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="MakerWormChoiceBox" type="VBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="OptionLabel" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerWormChoiceBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "or"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.88, 0.9, 0.93, 1)
+
+[node name="RowWorm" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerWormChoiceBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HookIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerWormChoiceBox/RowWorm"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("13")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Arrow" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerWormChoiceBox/RowWorm"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WormIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/MakerWormChoiceBox/RowWorm"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="SietchTabrSecondOptionBox" type="VBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="OptionLabel" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SietchTabrSecondOptionBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "or"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.88, 0.9, 0.93, 1)
+
+[node name="RowSecond" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SietchTabrSecondOptionBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+theme_override_constants/separation = 4
+
+[node name="WaterGain" type="Control" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SietchTabrSecondOptionBox/RowSecond"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+
+[node name="BadgeIcon" type="TextureRect" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SietchTabrSecondOptionBox/RowSecond/WaterGain"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BadgeValue" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SietchTabrSecondOptionBox/RowSecond/WaterGain"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 1)
+
+[node name="WormIcons" type="HBoxContainer" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox/SietchTabrSecondOptionBox/RowSecond"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="EffectsLabel" type="Label" parent="RootFrame/InnerFrame/ContentMargin/ContentRow/EffectsBlock/EffectsMargin/EffectsVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.88, 0.9, 0.93, 1)
+
+[node name="RequiredIcons" type="HBoxContainer" parent="."]
+offset_left = -118.0
+offset_top = -62.0
+offset_right = 0.0
+offset_bottom = -22.0
+theme_override_constants/separation = 4

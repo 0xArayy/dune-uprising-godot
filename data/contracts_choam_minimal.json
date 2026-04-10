@@ -1,0 +1,92 @@
+[
+  {
+    "id": "choam_arrakeen_supply",
+    "name": "arrakeen supply convoy",
+    "trigger": {
+      "type": "agent_on_space",
+      "spaceId": "arrakeen"
+    },
+    "rewardEffects": [
+      { "type": "gain_resource", "resource": "solari", "amount": 2 }
+    ]
+  },
+  {
+    "id": "choam_spice_refinery_output",
+    "name": "spice refinery output",
+    "trigger": {
+      "type": "agent_on_space",
+      "spaceId": "spice_refinery"
+    },
+    "rewardEffects": [
+      { "type": "gain_resource", "resource": "spice", "amount": 1 },
+      { "type": "gain_resource", "resource": "solari", "amount": 1 }
+    ]
+  },
+  {
+    "id": "choam_research_station_intel",
+    "name": "research station intel",
+    "trigger": {
+      "type": "agent_on_space",
+      "spaceId": "research_station"
+    },
+    "rewardEffects": [
+      { "type": "draw_cards", "amount": 1 }
+    ]
+  },
+  {
+    "id": "choam_heighliner_manifest",
+    "name": "heighliner manifest",
+    "trigger": {
+      "type": "agent_on_space",
+      "spaceId": "heighliner"
+    },
+    "rewardEffects": [
+      { "type": "recruit_troops", "amount": 1 },
+      { "type": "gain_resource", "resource": "solari", "amount": 1 }
+    ]
+  },
+  {
+    "id": "choam_sardaukar_levy",
+    "name": "sardaukar levy",
+    "trigger": {
+      "type": "agent_on_space",
+      "spaceId": "sardaukar"
+    },
+    "rewardEffects": [
+      { "type": "gain_influence", "faction": "emperor", "amount": 1 }
+    ]
+  },
+  {
+    "id": "choam_fremen_route",
+    "name": "fremen route charter",
+    "trigger": {
+      "type": "agent_on_space",
+      "spaceId": "desert_tactics"
+    },
+    "rewardEffects": [
+      { "type": "gain_resource", "resource": "water", "amount": 1 }
+    ]
+  },
+  {
+    "id": "choam_guild_logistics",
+    "name": "guild logistics",
+    "trigger": {
+      "type": "agent_on_space",
+      "spaceId": "shipping"
+    },
+    "rewardEffects": [
+      { "type": "gain_influence", "faction": "guild", "amount": 1 }
+    ]
+  },
+  {
+    "id": "choam_secrets_wire",
+    "name": "secrets wire",
+    "trigger": {
+      "type": "agent_on_space",
+      "spaceId": "secrets"
+    },
+    "rewardEffects": [
+      { "type": "draw_intrigue", "amount": 1 }
+    ]
+  }
+]

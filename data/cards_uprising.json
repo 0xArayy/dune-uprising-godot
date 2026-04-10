@@ -1,0 +1,2926 @@
+[
+  {
+    "id": "starter_dagger",
+    "name": "Dagger",
+    "starter": true,
+    "starterCount": 2,
+    "source": "starter",
+    "cost": 0,
+    "agentIcons": [
+      "landsraad"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "starter",
+      "combat"
+    ]
+  },
+  {
+    "id": "starter_convincing_argument",
+    "name": "Convincing Argument",
+    "starter": true,
+    "starterCount": 2,
+    "source": "starter",
+    "cost": 0,
+    "agentIcons": [],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "starter",
+      "persuasion"
+    ]
+  },
+  {
+    "id": "starter_diplomacy",
+    "name": "Diplomacy",
+    "starter": true,
+    "starterCount": 1,
+    "source": "starter",
+    "cost": 0,
+    "agentIcons": [
+      "emperor",
+      "spacing_guild",
+      "bene_gesserit",
+      "fremen"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "starter",
+      "persuasion",
+      "faction_access"
+    ]
+  },
+  {
+    "id": "starter_dune_desert_planet",
+    "name": "Dune, the Desert Planet",
+    "starter": true,
+    "starterCount": 2,
+    "source": "starter",
+    "cost": 0,
+    "agentIcons": [
+      "spice_trade"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "starter",
+      "persuasion",
+      "spice_access"
+    ]
+  },
+  {
+    "id": "starter_reconnaissance",
+    "name": "Reconnaissance",
+    "starter": true,
+    "starterCount": 1,
+    "source": "starter",
+    "cost": 0,
+    "agentIcons": [],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "starter",
+      "persuasion"
+    ]
+  },
+  {
+    "id": "starter_seek_allies",
+    "name": "Seek Allies",
+    "starter": true,
+    "starterCount": 1,
+    "source": "starter",
+    "cost": 0,
+    "agentIcons": [
+      "emperor",
+      "spacing_guild",
+      "bene_gesserit",
+      "fremen"
+    ],
+    "agentEffect": [],
+    "revealEffect": [],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "starter",
+      "persuasion",
+      "faction_access"
+    ]
+  },
+  {
+    "id": "starter_signet_ring",
+    "name": "Signet Ring",
+    "starter": true,
+    "starterCount": 1,
+    "source": "starter",
+    "cost": 0,
+    "agentIcons": [
+      "landsraad",
+      "spice_trade",
+      "city"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "starter",
+      "persuasion",
+      "signet"
+    ]
+  },
+  {
+    "id": "reserve_prepare_the_way",
+    "name": "Prepare the Way",
+    "starter": false,
+    "source": "reserve",
+    "reserveCount": 8,
+    "cost": 2,
+    "agentIcons": [],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "reserve",
+      "preparation"
+    ]
+  },
+  {
+    "id": "reserve_spice_must_flow",
+    "name": "The Spice Must Flow",
+    "starter": false,
+    "source": "reserve",
+    "reserveCount": 10,
+    "cost": 9,
+    "agentIcons": [],
+    "agentEffect": [],
+    "revealEffect": [],
+    "faction": null,
+    "purchaseBonus": [
+      {
+        "type": "vp",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "reserve",
+      "spice_must_flow",
+      "vp"
+    ]
+  },
+  {
+    "id": "imperium_unswerving_loyalty",
+    "name": "Unswerving Loyalty",
+    "starter": false,
+    "source": "imperium",
+    "cost": 1,
+    "agentIcons": [],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      },
+      {
+        "type": "fremen_bond_deploy_or_retreat",
+        "amount": 1
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Unwerwing Loyalty cost 1 persuasion to buy. Has \"Freman\" tag (which provide you Fremen Bond for other cards). Card has no agent icons and agent box is empty. On reveal you get 1 persuasion and 1 troop. If you have Fremen Bond you may deploy or retreat one of your troops."
+  },
+  {
+    "id": "imperium_space_time_folding",
+    "name": "Space-time Folding",
+    "starter": false,
+    "source": "imperium",
+    "cost": 1,
+    "agentIcons": [
+      "spacing_guild"
+    ],
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "discard 1 card -> draw 1 card (+1 if discarded guild card)",
+            "effects": [
+              {
+                "type": "discard_card",
+                "from": "hand",
+                "amount": 1
+              },
+              {
+                "type": "draw_cards",
+                "amount": 1
+              },
+              {
+                "type": "if",
+                "requirement": {
+                  "type": "discarded_card_has_tag",
+                  "tag": "guild",
+                  "value": true
+                },
+                "then": [
+                  {
+                    "type": "draw_cards",
+                    "amount": 1
+                  }
+                ],
+                "else": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Space-time Folding cost 1 persuasion, has Spacing Guild tag. You can send an agent to Spacing Guild locations using this card. When you send an agent you may discard card from your hand to draw card. If you discarded a Spacing Guild card you must draw one more card. On reveal you gain 1 persuasion."
+  },
+  {
+    "id": "imperium_weirding_woman",
+    "name": "Weirding Woman",
+    "starter": false,
+    "source": "imperium",
+    "cost": 1,
+    "agentIcons": [
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "beneGesserit",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "combat",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Cost 1 persuasion. Has Bene Gesserit faction tag. You can send an agent to City and Spice Trade spaces. When you send an agent using this card: If you have another Bene Gesserit card in play, return this card from play to your hand. On reveal you gain 1 persuasion and 1 sword."
+  },
+  {
+    "id": "imperium_sardaukar_soldier",
+    "name": "Sardaukar Soldier",
+    "starter": false,
+    "source": "imperium",
+    "cost": 1,
+    "agentIcons": [
+      "city"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "emperor",
+    "purchaseBonus": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "emperor",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Sardaukar Soldier cost 1 persuasion, has Emperor faction tag. You can send an agent to City space. When this card is trashed you draw 1 Intrigue. On reveal you gain 1 persuasion and 1 sword."
+  },
+  {
+    "id": "imperium_smuggler_s_harvester",
+    "name": "Smuggler's Harvester",
+    "starter": false,
+    "source": "imperium",
+    "cost": 1,
+    "agentIcons": [
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "sent_agent_to_maker_space_this_turn",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "gain_resource",
+            "resource": "spice",
+            "amount": 1
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Smuggler's Harvester cost 1 persuasion, has Spacing Guild faction tag. You can send an agent to Spice Trade space. If you sent an Agent to a Maker board space this turn you gain 1 spice. On reveal you gain 1 persuasion."
+  },
+  {
+    "id": "imperium_maker_keeper",
+    "name": "Maker Keeper",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [
+      "city"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "min_influence",
+          "faction": "beneGesserit",
+          "value": 2
+        },
+        "then": [
+          {
+            "type": "gain_resource",
+            "resource": "water",
+            "amount": 1
+          }
+        ],
+        "else": []
+      },
+      {
+        "type": "if",
+        "requirement": {
+          "type": "min_influence",
+          "faction": "fremen",
+          "value": 2
+        },
+        "then": [
+          {
+            "type": "gain_resource",
+            "resource": "spice",
+            "amount": 1
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Maker Keeper cost 2 persuasion, has Bene Gesserit and Fremen faction tags. You can send an agent to City spaces. If you have 2 influence on Bene Gesserit faction - gain 1 water. If you have 2 influence on Fremen faction - gain 1 spice. On reveal you gain 2 persuasion.",
+    "factions": [
+      "beneGesserit",
+      "fremen"
+    ]
+  },
+  {
+    "id": "imperium_reliable_informant",
+    "name": "Reliable Informant",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [
+      "spacing_guild"
+    ],
+    "agentEffect": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 1
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Reliable Informant cost 2 persuasion, has Spacing Guild faction tag. You can send an agent to Spacing Guild locations using this card. When you play this card you may place a Spy from your supply on an unoccupied observation post next to Spacing Guild, Bene Gesserit or Fremen location. On reveal you gain 1 persuasion and 1 solari."
+  },
+  {
+    "id": "imperium_hidden_missive",
+    "name": "Hidden Missive",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [
+      "landsraad"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "min_influence",
+          "faction": "beneGesserit",
+          "value": 2
+        },
+        "then": [
+          {
+            "type": "recruit_troops",
+            "amount": 1
+          },
+          {
+            "type": "draw_cards",
+            "amount": 1
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "beneGesserit",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "combat",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Hidden Missive cost 2 persuasion, has Bene Gesserit faction tag. You can send an agent to Landsraad locations using this card. If you have 2 influence on Bene Gesserit faction you recruit one troop and draw card. On reveal you gain 1 persuasion and 1 sword."
+  },
+  {
+    "id": "imperium_wheels_within_wheels",
+    "name": "Wheels Within Wheels",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [
+      "spy"
+    ],
+    "agentEffect": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "emperor",
+      "guild",
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Wheels Within Wheels cost 2 persuasion, has Emperor and Spacing Guild faction tags. You can send an Agent to a board space connected to an observation post where you currently have a Spy. When you send an agent using this card: If you have 2 influence on Emperor faction - gain 2 solari. If you have 2 influence on Spacing Guild faction - gain 1 spice. On reveal you gain 1 persuasion and 1 spy.",
+    "factions": [
+      "emperor",
+      "guild"
+    ]
+  },
+  {
+    "id": "imperium_fedaykin_stilltent",
+    "name": "Fedaykin Stilltent",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "sent_agent_to_maker_space_this_turn",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "recruit_troops",
+            "amount": 1
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "gain_persuasion",
+        "amount": 0
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Fedaykin Stilltent cost 2 persuasion, has Fremen faction tag. You can send an agent to Spice Trade space. If you sent an Agent to a Maker board space this turn you gain 1 troop. On reveal you gain 1 water."
+  },
+  {
+    "id": "imperium_imperial_spymaster",
+    "name": "Imperial Spymaster",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [
+      "emperor",
+      "spy"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "recalled_spy_this_turn",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "draw_intrigue",
+            "amount": 1
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "emperor",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "emperor",
+      "imperium",
+      "intrigue",
+      "persuasion"
+    ],
+    "rawDescription": "Imperial Spymaster cost 2 persuasion, has Emperor faction tag. You can send an agent to Emperor locations or to a board space connected to an observation post where you currently have a Spy. If you recalled a Spy this turn you draw 1 Intrigue. On reveal you gain 1 persuasion and 1 sword."
+  },
+  {
+    "id": "imperium_spy_network",
+    "name": "Spy Network",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      },
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "emperor",
+      "guild",
+      "imperium",
+      "intrigue",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Spy Network cost 2 persuasion, has Emperor and Spacing Guild faction tags. On acquire: you may place a Spy from your supply on an unoccupied observation post on the board. Card has no agent icons and agent box is empty. On reveal you gain 2 persuasion, 1 sword and if you have two or more Spies on the board you may recall a Spy to draw 1 Intrigue.",
+    "factions": [
+      "emperor",
+      "guild"
+    ],
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_desert_survival",
+    "name": "Desert Survival",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "trash_card",
+        "from": "hand",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Desert Survival cost 2 persuasion, has Fremen faction tag. You can send an agent to Spice Trade spaces. You may trash one card from your hand, discard pile, or in play On reveal you gain 1 persuasion and 1 sword."
+  },
+  {
+    "id": "imperium_undercover_asset",
+    "name": "Undercover Asset",
+    "starter": false,
+    "source": "imperium",
+    "cost": 2,
+    "agentIcons": [
+      "landsraad",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 2
+      },
+      {
+        "type": "gain_persuasion",
+        "amount": 0
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "emperor",
+      "guild",
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Undercover Asset cost 2 persuasion, has Emperor and Spacing Guild faction tags. You can send an agent to Landsraad, City, or Spice Trade spaces. Ignore Influence requirements on board spaces when sending an Agent this turn. On reveal you gain 1 spy or 2 swords.",
+    "factions": [
+      "emperor",
+      "guild"
+    ]
+  },
+  {
+    "id": "imperium_bene_gesserit_operative",
+    "name": "Bene Gesserit Operative",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "bene_gesserit"
+    ],
+    "agentEffect": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 3
+      }
+    ],
+    "faction": "beneGesserit",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Bene Gesserit Operative cost 3 persuasion, has Bene Gesserit faction tag. You can send an agent to Bene Gesserit locations. You may place a Spy from your supply on an unoccupied observation post on the board. On reveal you gain 1 persuasion and if you have two or more Spies on the board gain 2 additional persuasion."
+  },
+  {
+    "id": "imperium_maula_pistol",
+    "name": "Maula Pistol",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "draw_cards",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Maula Pistol cost 3 persuasion, has Fremen faction tag. You can send an agent to City or Spice Trade spaces. Draw a card from your deck. On reveal you gain 1 persuasion and 1 sword."
+  },
+  {
+    "id": "imperium_northern_watermaster",
+    "name": "Northern Watermaster",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "city"
+    ],
+    "agentEffect": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "if",
+        "requirement": {
+          "type": "has_fremen_bond",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "gain_resource",
+            "resource": "spice",
+            "amount": 2
+          }
+        ],
+        "else": []
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Northern Watermaster cost 3 persuasion, has Fremen faction tag. You can send an agent to City spaces. Gain 1 water. On reveal you gain 1 persuasion and if you have Fremen Bond gain 2 spice."
+  },
+  {
+    "id": "imperium_covert_operation",
+    "name": "Covert Operation",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "spy"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "place_spy",
+        "amount": 2
+      },
+      {
+        "type": "gain_persuasion",
+        "amount": 0
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Covert Operation cost 3 persuasion. You can send an agent to a board space connected to an observation post where you currently have a Spy. Each opponent discards a card. On reveal you gain 2 spies."
+  },
+  {
+    "id": "imperium_double_agent",
+    "name": "Double Agent",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "landsraad",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "emperor",
+      "guild",
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Double Agent cost 3 persuasion, has Emperor and Spacing Guild faction tags. You can send an agent to Landsraad, City, or Spice Trade spaces. Place a Spy from your supply on the board space you sent an Agent to this turn. You may place this Spy on the same observation post as another player's Spy. On reveal you gain 1 persuasion and 1 sword.",
+    "factions": [
+      "emperor",
+      "guild"
+    ]
+  },
+  {
+    "id": "imperium_guild_envoy",
+    "name": "Guild Envoy",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "emperor",
+      "spacing_guild",
+      "bene_gesserit",
+      "fremen"
+    ],
+    "agentEffect": [
+      {
+        "type": "discard_card",
+        "from": "hand",
+        "amount": 1
+      },
+      {
+        "type": "draw_cards",
+        "amount": 2
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Guild Envoy cost 3 persuasion, has Spacing Guild faction tag. You can send an agent to Emperor, Spacing Guild, Bene Gesserit, or Fremen locations. When you send an agent using this card: you must discard a card from your hand. If you discarded a Spacing Guild card you draw 2 cards. On reveal you gain 1 persuasion."
+  },
+  {
+    "id": "imperium_rebel_supplier",
+    "name": "Rebel Supplier",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "city"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "recalled_spy_this_turn",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "recruit_troops",
+            "amount": 2
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_sword",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 1
+      },
+      {
+        "type": "gain_persuasion",
+        "amount": 0
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Rebel Supplier cost 3 persuasion, has Fremen faction tag. You can send an agent to City spaces. If you recalled a Spy this turn you gain 2 troops. On reveal you gain 1 spice and 1 sword."
+  },
+  {
+    "id": "imperium_calculus_of_power",
+    "name": "Calculus of Power",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "city",
+      "spy"
+    ],
+    "agentEffect": [
+      {
+        "type": "trash_card",
+        "from": "hand",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "emperor",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "emperor",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Calculus of Power cost 3 persuasion, has Emperor faction tag. You can send an agent to City spaces or to a board space connected to an observation post where you currently have a Spy. You may trash one card from your hand, discard pile, or in play. On reveal you gain 2 persuasion and you may trash another Emperor card you have in play to gain 3 swords."
+  },
+  {
+    "id": "imperium_guild_spy",
+    "name": "Guild Spy",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "spy"
+    ],
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "discard 1 card -> draw 1 card; if guild discarded draw 1 intrigue",
+            "effects": [
+              {
+                "type": "discard_card",
+                "from": "hand",
+                "amount": 1
+              },
+              {
+                "type": "draw_cards",
+                "amount": 1
+              },
+              {
+                "type": "if",
+                "requirement": {
+                  "type": "discarded_card_has_tag",
+                  "tag": "guild",
+                  "value": true
+                },
+                "then": [
+                  {
+                    "type": "draw_intrigue",
+                    "amount": 1
+                  }
+                ],
+                "else": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "imperium",
+      "intrigue",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Guild Spy cost 3 persuasion, has Spacing Guild faction tag. On acquire: you may place a Spy from your supply on an unoccupied observation post on the board. You can send an agent to a board space connected to an observation post where you currently have a Spy. When you send an agent using this card: you may discard a card from your hand to draw a card. If you discarded a Spacing Guild card you draw 1 Intrigue. On reveal you gain 2 persuasion and if you acquire The Spice Must Flow this turn, gain one Influence with each Faction you are spying on.",
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_dangerous_rhetoric",
+    "name": "Dangerous Rhetoric",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "landsraad",
+      "spy"
+    ],
+    "agentEffect": [
+      {
+        "type": "gain_influence",
+        "faction": "anyone",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Dangerous Rhetoric cost 3 persuasion. You can send an agent to Landsraad spaces or to a board space connected to an observation post where you currently have a Spy. When you send an agent using this card: Gain one Influence. Choose any one of the four Factions. You must trash this card. On reveal you gain 1 persuasion and 1 sword."
+  },
+  {
+    "id": "imperium_branching_path",
+    "name": "Branching Path",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "bene_gesserit",
+      "city"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "has_alliance",
+          "faction": "beneGesserit",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "choice",
+            "options": [
+              {
+                "label": "trash 1 intrigue -> draw 1 intrigue and gain 2 spice",
+                "effects": [
+                  {
+                    "type": "trash_intrigue",
+                    "amount": 1
+                  },
+                  {
+                    "type": "draw_intrigue",
+                    "amount": 1
+                  },
+                  {
+                    "type": "gain_resource",
+                    "resource": "spice",
+                    "amount": 2
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      }
+    ],
+    "faction": "beneGesserit",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "imperium",
+      "intrigue",
+      "persuasion"
+    ],
+    "rawDescription": "Branching Path cost 3 persuasion, has Bene Gesserit faction tag. You can send an agent to Bene Gesserit or City locations. If you have Bene Gesserit Alliance you may trash an Intrigue card to draw 1 Intrigue and gain 2 spice. On reveal you gain 2 persuasion."
+  },
+  {
+    "id": "imperium_ecological_testing_station",
+    "name": "Ecological Testing Station",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "fremen",
+      "city"
+    ],
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "pay 2 water -> draw 2 cards",
+            "effects": [
+              {
+                "type": "spend_resource",
+                "resource": "water",
+                "amount": 2
+              },
+              {
+                "type": "draw_cards",
+                "amount": 2
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "if",
+        "requirement": {
+          "type": "has_fremen_bond",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "gain_resource",
+            "resource": "water",
+            "amount": 1
+          }
+        ],
+        "else": []
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Ecological Testing Station cost 3 persuasion, has Fremen faction tag. You can send an agent to Fremen or City locations. You may pay 2 water to draw 2 cards. On reveal you gain 1 persuasion and if you have Fremen Bond gain 1 water."
+  },
+  {
+    "id": "imperium_smuggler_s_haven",
+    "name": "Smuggler's Haven",
+    "starter": false,
+    "source": "imperium",
+    "cost": 4,
+    "agentIcons": [
+      "spacing_guild",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "pay 4 spice -> gain 1 vp",
+            "effects": [
+              {
+                "type": "spend_resource",
+                "resource": "spice",
+                "amount": 4
+              },
+              {
+                "type": "vp",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "if",
+        "requirement": {
+          "type": "spying_on_maker_space",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "gain_resource",
+            "resource": "spice",
+            "amount": 2
+          }
+        ],
+        "else": []
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Smuggler's Haven cost 4 persuasion, has Spacing Guild faction tag. You can send an agent to Spacing Guild or Spice Trade locations. You may pay 4 spice to gain 1 victory point. On reveal you gain 1 persuasion and if you are spying on a Maker board space gain 2 spice."
+  },
+  {
+    "id": "imperium_shishakli",
+    "name": "Shishakli",
+    "starter": false,
+    "source": "imperium",
+    "cost": 4,
+    "agentIcons": [
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "trash 1 card -> draw 1 card",
+            "effects": [
+              {
+                "type": "trash_card",
+                "from": "hand",
+                "amount": 1
+              },
+              {
+                "type": "draw_cards",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "if",
+        "requirement": {
+          "type": "has_fremen_bond",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "gain_influence",
+            "faction": "fremen",
+            "amount": 1
+          }
+        ],
+        "else": []
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Shishakli cost 4 persuasion, has Fremen faction tag. You can send an agent to City or Spice Trade spaces. You may trash one card from your hand, discard pile, or in play to draw a card. On reveal you gain 2 swords and if you have Fremen Bond gain 1 Influence with Fremen faction.",
+    "rawAttributes": [
+      {
+        "group": "on_reveal",
+        "name": "Freman bump",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_paracompass",
+    "name": "Paracompass",
+    "starter": false,
+    "source": "imperium",
+    "cost": 4,
+    "agentIcons": [
+      "city"
+    ],
+    "agentEffect": [
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 3
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Paracompass cost 4 persuasion. You can send an agent to City spaces. Gain 2 solari. On reveal if you have a seat on the High Council gain 2 persuasion and if you also have a Swordmaster gain 1 additional persuasion."
+  },
+  {
+    "id": "imperium_sardaukar_coordination",
+    "name": "Sardaukar Coordination",
+    "starter": false,
+    "source": "imperium",
+    "cost": 4,
+    "agentIcons": [
+      "emperor",
+      "landsraad"
+    ],
+    "agentEffect": [
+      {
+        "type": "deploy_recruited_to_conflict",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "emperor",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "emperor",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Sardaukar Coordination cost 4 persuasion, has Emperor faction tag. You can send an agent to Emperor or Landsraad locations. You may deploy any troops you recruit this turn to the Conflict. On reveal you gain 2 persuasion and 1 sword for each Emperor card you revealed (including this one)."
+  },
+  {
+    "id": "imperium_truthtrance",
+    "name": "Truthtrance",
+    "starter": false,
+    "source": "imperium",
+    "cost": 4,
+    "agentIcons": [
+      "emperor",
+      "spacing_guild",
+      "bene_gesserit",
+      "fremen"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": "beneGesserit",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Truthtrance cost 4 persuasion, has Bene Gesserit faction tag. You can send an agent to Emperor, Spacing Guild, Bene Gesserit, or Fremen locations. On reveal you gain 1 persuasion."
+  },
+  {
+    "id": "imperium_public_spectacle",
+    "name": "Public Spectacle",
+    "starter": false,
+    "source": "imperium",
+    "cost": 4,
+    "agentIcons": [
+      "spy"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "recalled_spy_this_turn",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "gain_influence",
+            "faction": "anyone",
+            "amount": 1
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "faction": "emperor",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "emperor",
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Public Spectacle cost 4 persuasion, has Emperor faction tag. You can send an agent to a board space connected to an observation post where you currently have a Spy. If you recalled a Spy this turn gain 1 Influence with any Faction. On reveal you gain 1 persuasion and 1 spy."
+  },
+  {
+    "id": "imperium_southern_elders",
+    "name": "Southern Elders",
+    "starter": false,
+    "source": "imperium",
+    "cost": 4,
+    "agentIcons": [
+      "bene_gesserit",
+      "fremen"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "has_another_card_in_play_tag",
+          "tag": "beneGesserit",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "recruit_troops",
+            "amount": 2
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "if",
+        "requirement": {
+          "type": "has_fremen_bond",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "gain_persuasion",
+            "amount": 2
+          }
+        ],
+        "else": []
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Southern Elders cost 4 persuasion, has Bene Gesserit and Fremen faction tags. You can send an agent to Bene Gesserit or Fremen locations. If you have another Bene Gesserit card in play gain 2 troops. On reveal you gain 1 water and if you have Fremen Bond gain 2 persuasion.",
+    "factions": [
+      "beneGesserit",
+      "fremen"
+    ]
+  },
+  {
+    "id": "imperium_tread_in_darkness",
+    "name": "Tread in Darkness",
+    "starter": false,
+    "source": "imperium",
+    "cost": 4,
+    "agentIcons": [
+      "landsraad",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "has_another_card_in_play_tag",
+          "tag": "beneGesserit",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "choice",
+            "options": [
+              {
+                "label": "trash 1 card -> draw 1 card",
+                "effects": [
+                  {
+                    "type": "trash_card",
+                    "from": "hand",
+                    "amount": 1
+                  },
+                  {
+                    "type": "draw_cards",
+                    "amount": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "beneGesserit",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "combat",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Tread in Darkness cost 4 persuasion, has Bene Gesserit faction tag. You can send an agent to Landsraad, City, or Spice Trade spaces. If you have another Bene Gesserit card in play you may trash one card from your hand, discard pile, or in play and draw a card. On reveal you gain 2 persuasion and 1 sword."
+  },
+  {
+    "id": "imperium_spacing_guild_s_favor",
+    "name": "Spacing Guild's Favor",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "spacing_guild",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "draw_cards",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "pay 3 spice -> gain 1 influence (any faction)",
+            "effects": [
+              {
+                "type": "spend_resource",
+                "resource": "spice",
+                "amount": 3
+              },
+              {
+                "type": "gain_influence",
+                "faction": "anyone",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Spacing Guild's Favor cost 5 persuasion, has Spacing Guild faction tag. You can send an agent to Spacing Guild or Spice Trade locations. When this card is discarded: gain 2 spice. When you send an Agent using this card then draw a card from your deck. On reveal you gain 2 persuasion and you may pay 3 spice to gain 1 Influence with any Faction.",
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "when discarded ability",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_captured_mentat",
+    "name": "Captured Mentat",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "landsraad",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "discard 1 card -> draw 1 intrigue and draw 1 card",
+            "effects": [
+              {
+                "type": "discard_card",
+                "from": "hand",
+                "amount": 1
+              },
+              {
+                "type": "draw_intrigue",
+                "amount": 1
+              },
+              {
+                "type": "draw_cards",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "lose 1 influence and gain 1 influence",
+            "effects": [
+              {
+                "type": "lose_influence",
+                "faction": "anyone",
+                "amount": 1
+              },
+              {
+                "type": "gain_influence",
+                "faction": "anyone",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "imperium",
+      "intrigue",
+      "persuasion"
+    ],
+    "rawDescription": "Captured Mentat cost 5 persuasion. You can send an agent to Landsraad or Spice Trade spaces. You may discard a card from your hand to draw 1 Intrigue and draw a card from your deck. On reveal you gain 1 persuasion and you may lose 1 Influence with any Faction to gain 1 Influence with any Faction."
+  },
+  {
+    "id": "imperium_subversive_advisor",
+    "name": "Subversive Advisor",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "spy"
+    ],
+    "agentEffect": [
+      {
+        "type": "gain_influence",
+        "faction": "anyone",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Subversive Advisor cost 5 persuasion. On acquire: you may place a Spy from your supply on an unoccupied observation post on the board. You can send an agent to a board space connected to an observation post where you currently have a Spy. If you sent an Agent to a Faction board space this turn, gain two Influence instead of one and trash this card. On reveal you gain 1 persuasion.",
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_leadership",
+    "name": "Leadership",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "fremen",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "draw_cards",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_sword",
+        "amount": 1
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Leadership cost 5 persuasion, has Fremen faction tag. You can send an agent to Fremen or Spice Trade locations. For each sandworm you have in the Conflict draw a card from your deck. On reveal you gain 2 persuasion, 1 sword and 1 additional sword for each other revealed card that provides one or more swords this turn."
+  },
+  {
+    "id": "imperium_in_high_places",
+    "name": "In High Places",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "emperor",
+      "bene_gesserit"
+    ],
+    "agentEffect": [
+      {
+        "type": "draw_cards",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 5
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "emperor",
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "In High Places cost 5 persuasion, has Emperor and Bene Gesserit faction tags. On acquire: you may place a Spy from your supply on an unoccupied observation post on the board. You can send an agent to Emperor or Bene Gesserit locations. If you have another Bene Gesserit card in play: draw a card from your deck and place a Spy from your supply on an unoccupied observation post on the board. On reveal you gain 2 persuasion and you may recall 2 spies to gain 3 additional persuasion.",
+    "factions": [
+      "emperor",
+      "beneGesserit"
+    ],
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_strike_fleet",
+    "name": "Strike Fleet",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "spy"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "recalled_spy_this_turn",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "recruit_troops",
+            "amount": 3
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_sword",
+        "amount": 3
+      },
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [
+      {
+        "type": "place_spy",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "imperium",
+      "persuasion",
+      "spy"
+    ],
+    "rawDescription": "Strike Fleet cost 5 persuasion. On acquire: you may place a Spy from your supply on an unoccupied observation post on the board. You can send an agent to a board space connected to an observation post where you currently have a Spy. If you recalled a Spy this turn gain 3 troops. On reveal you gain 1 persuasion and 3 swords.",
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_theacherous_maneuver",
+    "name": "Theacherous Maneuver",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "emperor",
+      "spacing_guild",
+      "bene_gesserit",
+      "fremen"
+    ],
+    "agentEffect": [
+      {
+        "type": "gain_influence",
+        "faction": "anyone",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      }
+    ],
+    "faction": "emperor",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "emperor",
+      "imperium",
+      "intrigue",
+      "persuasion"
+    ],
+    "rawDescription": "Treacherous Maneuver cost 5 persuasion, has Emperor faction tag. You can send an agent to Emperor, Spacing Guild, Bene Gesserit, or Fremen locations. You may trash this card and an Emperor card from your hand to gain two Influence instead of one. On reveal you gain 1 persuasion and draw 1 Intrigue."
+  },
+  {
+    "id": "imperium_chani_clever_tactician",
+    "name": "Chani, Clever Tactician",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "fremen",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_sword",
+        "amount": 4
+      },
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "intrigue",
+      "persuasion"
+    ],
+    "rawDescription": "Chani, Clever Tactician cost 5 persuasion, has Fremen faction tag. You can send an agent to Fremen, City, or Spice Trade spaces. If you have three or more units in the Conflict draw 1 Intrigue. On reveal you may retreat two of your troops to gain 4 swords and if you have Fremen Bond gain 2 persuasion."
+  },
+  {
+    "id": "imperium_junction_headquarters",
+    "name": "Junction Headquarters",
+    "starter": false,
+    "source": "imperium",
+    "cost": 6,
+    "agentIcons": [
+      "landsraad",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "has_alliance",
+          "faction": "guild",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "choice",
+            "options": [
+              {
+                "label": "trash 1 intrigue and pay 2 spice -> gain 1 vp",
+                "effects": [
+                  {
+                    "type": "trash_intrigue",
+                    "amount": 1
+                  },
+                  {
+                    "type": "spend_resource",
+                    "resource": "spice",
+                    "amount": 2
+                  },
+                  {
+                    "type": "vp",
+                    "amount": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      },
+      {
+        "type": "gain_resource",
+        "resource": "water",
+        "amount": 1
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Junction Headquarters cost 6 persuasion, has Spacing Guild faction tag. You can send an agent to Landsraad, City, or Spice Trade spaces. If you have Spacing Guild Alliance you may trash an Intrigue card and pay 2 spice to gain 1 victory point. On reveal you gain 1 persuasion, 1 water, and 1 troop."
+  },
+  {
+    "id": "imperium_corrinth_city",
+    "name": "Corrinth City",
+    "starter": false,
+    "source": "imperium",
+    "cost": 6,
+    "agentIcons": [
+      "emperor",
+      "landsraad"
+    ],
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "discard 2 cards and pay 5 solari -> gain 1 vp",
+            "effects": [
+              {
+                "type": "discard_card",
+                "from": "hand",
+                "amount": 2
+              },
+              {
+                "type": "spend_resource",
+                "resource": "solari",
+                "amount": 5
+              },
+              {
+                "type": "vp",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "gain 5 solari",
+            "effects": [
+              {
+                "type": "gain_resource",
+                "resource": "solari",
+                "amount": 5
+              }
+            ]
+          },
+          {
+            "label": "pay 5 solari -> take high council seat",
+            "effects": [
+              {
+                "type": "spend_resource",
+                "resource": "solari",
+                "amount": 5
+              },
+              {
+                "type": "if",
+                "requirement": {
+                  "type": "flag",
+                  "key": "has_high_council_seat",
+                  "value": false
+                },
+                "then": [
+                  {
+                    "type": "set_flag",
+                    "key": "has_high_council_seat",
+                    "value": true
+                  }
+                ],
+                "else": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faction": "emperor",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "emperor",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Corrinth City cost 6 persuasion, has Emperor faction tag. You can send an agent to Emperor or Landsraad locations. You may discard 2 cards from your hand and pay 5 solari to gain 1 victory point. On reveal you gain 5 solari or you may pay 5 solari to take your seat on the High Council (if you haven't already)."
+  },
+  {
+    "id": "imperium_stilgar_the_devoted",
+    "name": "Stilgar, The Devoted",
+    "starter": false,
+    "source": "imperium",
+    "cost": 6,
+    "agentIcons": [
+      "fremen",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "recruit_troops",
+        "amount": 2
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Stilgar, The Devoted cost 6 persuasion, has Fremen faction tag. You can send an agent to Fremen, City, or Spice Trade spaces. Gain 2 troops. On reveal you gain 2 persuasion for each Fremen card you have in play (including this one)."
+  },
+  {
+    "id": "imperium_desert_power",
+    "name": "Desert Power",
+    "starter": false,
+    "source": "imperium",
+    "cost": 6,
+    "agentIcons": [
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {
+          "type": "sent_agent_to_maker_space_this_turn",
+          "value": true
+        },
+        "then": [
+          {
+            "type": "gain_resource",
+            "resource": "spice",
+            "amount": 2
+          }
+        ],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "gain 2 persuasion",
+            "effects": [
+              {
+                "type": "gain_persuasion",
+                "amount": 2
+              }
+            ]
+          },
+          {
+            "label": "if has maker hooks: pay 1 water -> summon sandworm",
+            "effects": [
+              {
+                "type": "if",
+                "requirement": {
+                  "type": "has_maker_hooks",
+                  "value": true
+                },
+                "then": [
+                  {
+                    "type": "spend_resource",
+                    "resource": "water",
+                    "amount": 1
+                  },
+                  {
+                    "type": "summon_sandworm",
+                    "amount": 1
+                  }
+                ],
+                "else": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Desert Power cost 6 persuasion, has Fremen faction tag. You can send an agent to Spice Trade spaces. If you sent an Agent to a Maker board space this turn gain 2 spice. On reveal you gain 2 persuasion or if you have Maker Hooks you may pay water to summon and deploy one sandworm"
+  },
+  {
+    "id": "imperium_price_is_no_object",
+    "name": "Price is No Object",
+    "starter": false,
+    "source": "imperium",
+    "cost": 6,
+    "agentIcons": [
+      "emperor",
+      "bene_gesserit"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_resource",
+        "resource": "solari",
+        "amount": 2
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "beneGesserit",
+      "emperor",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Price is No Object cost 6 persuasion, has Emperor and Bene Gesserit faction tags. On acquire: gain 2 solari. You can send an agent to Emperor or Bene Gesserit locations. You may acquire a card to your hand using Solari instead of Persuasion. On reveal you gain 2 persuasion and 2 solari.",
+    "factions": [
+      "emperor",
+      "beneGesserit"
+    ],
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_long_live_the_fighters",
+    "name": "Long Live the Fighters",
+    "starter": false,
+    "source": "imperium",
+    "cost": 7,
+    "agentIcons": [
+      "fremen",
+      "city"
+    ],
+    "agentEffect": [
+      {
+        "type": "draw_cards",
+        "amount": 1
+      },
+      {
+        "type": "trash_card",
+        "from": "hand",
+        "amount": 1
+      },
+      {
+        "type": "discard_card",
+        "from": "hand",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_sword",
+        "amount": 3
+      }
+    ],
+    "faction": "fremen",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "fremen",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Long Live the Fighters cost 7 persuasion, has Fremen faction tag. You can send an agent to Fremen or City locations. If your deck has three or more cards, look at the top three cards. Draw one, discard one, and trash one (trash is mandatory). On reveal you gain 2 persuasion and 3 swords."
+  },
+  {
+    "id": "imperium_overthrow",
+    "name": "Overthrow",
+    "starter": false,
+    "source": "imperium",
+    "cost": 8,
+    "agentIcons": [
+      "emperor",
+      "spacing_guild",
+      "bene_gesserit",
+      "fremen"
+    ],
+    "agentEffect": [],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_sword",
+        "amount": 2
+      },
+      {
+        "type": "recruit_troops",
+        "amount": 1
+      }
+    ],
+    "faction": null,
+    "purchaseBonus": [
+      {
+        "type": "draw_intrigue",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "combat",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Overthrow cost 8 persuasion. On acquire: draw 1 Intrigue. You can send an agent to Emperor, Spacing Guild, Bene Gesserit, or Fremen locations. Gain two Influence instead of one. On reveal you gain 2 persuasion, 2 swords, and 1 sword.",
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_steersman",
+    "name": "Steersman",
+    "starter": false,
+    "source": "imperium",
+    "cost": 8,
+    "agentIcons": [
+      "spacing_guild",
+      "landsraad",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "draw_cards",
+        "amount": 1
+      },
+      {
+        "type": "recall_agent",
+        "amount": 1,
+        "excludeJustPlaced": true
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 2
+      },
+      {
+        "type": "gain_resource",
+        "resource": "spice",
+        "amount": 2
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [
+      {
+        "type": "gain_influence",
+        "faction": "guild",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Steersman cost 8 persuasion, has Spacing Guild faction tag. On acquire: gain 1 Spacing Guild influence. You can send an agent to Spacing Guild, Landsraad, City, or Spice Trade locations. Draw a card from your deck and return one of your other Agents on the board to your Leader (not the Agent you sent during this turn). On reveal you gain 2 persuasion and 2 spice.",
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  },
+  {
+    "id": "imperium_cargo_runner",
+    "name": "Cargo Runner",
+    "starter": false,
+    "source": "imperium",
+    "cost": 3,
+    "agentIcons": [
+      "landsraad",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "draw_cards",
+        "amount": 2
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion",
+        "amount": 1
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Cargo Runner cost 3 persuasion, has Spacing Guild faction tag. You can send an agent to Landsraad, City, or Spice Trade spaces. If you have completed two or more contracts draw a card from your deck. If you have completed four or more contracts draw an additional card from your deck. On reveal you gain 1 persuasion."
+  },
+  {
+    "id": "imperium_delivery_agreement",
+    "name": "Delivery Agreement",
+    "starter": false,
+    "source": "imperium",
+    "cost": 5,
+    "agentIcons": [
+      "city"
+    ],
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "discard 1 card -> get 1 contract",
+            "effects": [
+              {
+                "type": "discard_card",
+                "from": "hand",
+                "amount": 1
+              },
+              {
+                "type": "get_contract",
+                "amount": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "gain 1 spice",
+            "effects": [
+              {
+                "type": "gain_resource",
+                "resource": "spice",
+                "amount": 1
+              }
+            ]
+          },
+          {
+            "label": "if completed >=4 contracts: may trash this to gain 1 vp",
+            "effects": [
+              {
+                "type": "if",
+                "requirement": {
+                  "type": "completed_contracts_at_least",
+                  "value": 4
+                },
+                "then": [
+                  {
+                    "type": "choice",
+                    "options": [
+                      {
+                        "label": "trash this card -> gain 1 vp",
+                        "effects": [
+                          {
+                            "type": "trash_this_card",
+                            "amount": 1
+                          },
+                          {
+                            "type": "vp",
+                            "amount": 1
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "else": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Delivery Agreement cost 5 persuasion, has Spacing Guild faction tag. You can send an agent to City spaces. You may discard a card from your hand to take a face-up contract. On reveal you gain 1 spice or if you have completed four or more contracts you may trash this card to gain 1 victory point."
+  },
+  {
+    "id": "imperium_priority_contracts",
+    "name": "Priority Contracts",
+    "starter": false,
+    "source": "imperium",
+    "cost": 6,
+    "agentIcons": [
+      "landsraad",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "get_contract",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "gain 2 spice",
+            "effects": [
+              {
+                "type": "gain_resource",
+                "resource": "spice",
+                "amount": 2
+              }
+            ]
+          },
+          {
+            "label": "if completed >=4 contracts: may trash this to gain 1 vp",
+            "effects": [
+              {
+                "type": "if",
+                "requirement": {
+                  "type": "completed_contracts_at_least",
+                  "value": 4
+                },
+                "then": [
+                  {
+                    "type": "choice",
+                    "options": [
+                      {
+                        "label": "trash this card -> gain 1 vp",
+                        "effects": [
+                          {
+                            "type": "trash_this_card",
+                            "amount": 1
+                          },
+                          {
+                            "type": "vp",
+                            "amount": 1
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "else": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium",
+      "persuasion"
+    ],
+    "rawDescription": "Priority Contracts cost 6 persuasion, has Spacing Guild faction tag. You can send an agent to Landsraad or Spice Trade spaces. Take a face-up contract. On reveal you gain 2 spice or if you have completed four or more contracts you may trash this card to gain 1 victory point."
+  },
+  {
+    "id": "imperium_interstellar_trade",
+    "name": "Interstellar Trade",
+    "starter": false,
+    "source": "imperium",
+    "cost": 7,
+    "agentIcons": [
+      "landsraad",
+      "city",
+      "spice_trade"
+    ],
+    "agentEffect": [
+      {
+        "type": "gain_influence",
+        "faction": "anyone",
+        "amount": 1
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "gain_persuasion_per_completed_contract",
+        "amount": 1
+      }
+    ],
+    "faction": "guild",
+    "purchaseBonus": [
+      {
+        "type": "get_contract",
+        "amount": 1
+      }
+    ],
+    "isUnique": false,
+    "tags": [
+      "guild",
+      "imperium"
+    ],
+    "rawDescription": "Interstellar Trade cost 7 persuasion, has Spacing Guild faction tag. On acquire: take a face-up contract. You can send an agent to Landsraad, City, or Spice Trade spaces. Gain 1 Influence with any Faction. On reveal you gain 1 persuasion for each contract you have completed.",
+    "rawAttributes": [
+      {
+        "group": "general",
+        "name": "Acquire bonus",
+        "value": null
+      }
+    ]
+  }
+]

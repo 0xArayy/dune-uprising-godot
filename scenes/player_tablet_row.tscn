@@ -1,0 +1,260 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/player_tablet_row.gd" id="1"]
+[ext_resource type="Texture2D" path="res://data/icons/resource_spice.png" id="2"]
+[ext_resource type="Texture2D" path="res://data/icons/solari.png" id="3"]
+[ext_resource type="Texture2D" path="res://data/icons/water.png" id="4"]
+[ext_resource type="Texture2D" path="res://data/icons/intrigue.png" id="5"]
+[ext_resource type="Texture2D" path="res://data/icons/agent.png" id="6"]
+[ext_resource type="Texture2D" path="res://data/icons/draw_card.png" id="7"]
+[ext_resource type="Texture2D" path="res://data/icons/emperor.png" id="8"]
+[ext_resource type="Texture2D" path="res://data/icons/spacing_guild.png" id="9"]
+[ext_resource type="Texture2D" path="res://data/icons/bene_gesserit.png" id="10"]
+[ext_resource type="Texture2D" path="res://data/icons/fremen.png" id="11"]
+[ext_resource type="Texture2D" path="res://data/icons/persuasion.png" id="12"]
+[ext_resource type="Texture2D" path="res://data/icons/contract.png" id="13"]
+[ext_resource type="Texture2D" path="res://data/icons/first_player.png" id="14"]
+[ext_resource type="Texture2D" path="res://data/icons/high_council.png" id="15"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_player_row_panel"]
+bg_color = Color(0, 0, 0, 0.36)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PlayerTabletRow" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 70)
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_player_row_panel")
+script = ExtResource("1")
+
+[node name="RowMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 5
+
+[node name="RowVBox" type="VBoxContainer" parent="RowMargin"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="TopRow" type="HBoxContainer" parent="RowMargin/RowVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="PortraitRect" type="TextureRect" parent="RowMargin/RowVBox/TopRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="LeaderNameLabel" type="Label" parent="RowMargin/RowVBox/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "leader"
+theme_override_font_sizes/font_size = 12
+
+[node name="FirstPlayerBadge" type="TextureRect" parent="RowMargin/RowVBox/TopRow"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("14")
+expand_mode = 1
+stretch_mode = 5
+tooltip_text = "First player"
+
+[node name="HighCouncilBadge" type="TextureRect" parent="RowMargin/RowVBox/TopRow"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("15")
+expand_mode = 1
+stretch_mode = 5
+tooltip_text = "High Council seat"
+
+[node name="BottomRow" type="HBoxContainer" parent="RowMargin/RowVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SpiceBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="SpiceIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/SpiceBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpiceValueLabel" type="Label" parent="RowMargin/RowVBox/BottomRow/SpiceBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+theme_override_font_sizes/font_size = 11
+
+[node name="SolariBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="SolariIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/SolariBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+texture = ExtResource("3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SolariValueLabel" type="Label" parent="RowMargin/RowVBox/BottomRow/SolariBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+theme_override_font_sizes/font_size = 11
+
+[node name="WaterBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="WaterIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/WaterBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WaterValueLabel" type="Label" parent="RowMargin/RowVBox/BottomRow/WaterBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+theme_override_font_sizes/font_size = 11
+
+[node name="PersuasionBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="PersuasionIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/PersuasionBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+texture = ExtResource("12")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PersuasionValueLabel" type="Label" parent="RowMargin/RowVBox/BottomRow/PersuasionBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+theme_override_font_sizes/font_size = 11
+
+[node name="IntrigueBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="IntrigueIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/IntrigueBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IntrigueValueLabel" type="Label" parent="RowMargin/RowVBox/BottomRow/IntrigueBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+theme_override_font_sizes/font_size = 11
+
+[node name="AgentsBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="AgentsIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/AgentsBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AgentsValueLabel" type="Label" parent="RowMargin/RowVBox/BottomRow/AgentsBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "2/2"
+theme_override_font_sizes/font_size = 11
+
+[node name="HandBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="HandIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/HandBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+texture = ExtResource("7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HandValueLabel" type="Label" parent="RowMargin/RowVBox/BottomRow/HandBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "5"
+theme_override_font_sizes/font_size = 11
+
+[node name="ContractsBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="ContractsIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/ContractsBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+texture = ExtResource("13")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContractsValueLabel" type="Label" parent="RowMargin/RowVBox/BottomRow/ContractsBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0/0"
+theme_override_font_sizes/font_size = 11
+
+[node name="AllianceBox" type="HBoxContainer" parent="RowMargin/RowVBox/BottomRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="EmperorAllianceIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/AllianceBox"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(38, 38)
+layout_mode = 2
+texture = ExtResource("8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GuildAllianceIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/AllianceBox"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(38, 38)
+layout_mode = 2
+texture = ExtResource("9")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BeneGesseritAllianceIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/AllianceBox"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(38, 38)
+layout_mode = 2
+texture = ExtResource("10")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FremenAllianceIcon" type="TextureRect" parent="RowMargin/RowVBox/BottomRow/AllianceBox"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(38, 38)
+layout_mode = 2
+texture = ExtResource("11")
+expand_mode = 1
+stretch_mode = 5
