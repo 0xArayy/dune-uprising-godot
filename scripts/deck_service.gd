@@ -197,4 +197,4 @@ func _ensure_card_zone_array(player_state: Dictionary, zone_key: String) -> Arra
 	return zone
 
 func _shuffle_array(values: Array) -> void:
-	RandomService.shuffle(values)
+	values.shuffle()

@@ -5,6 +5,13 @@ const RuleContractScript = preload("res://scripts/domain/rule_contract.gd")
 const EffectDslScript = preload("res://scripts/domain/effect_dsl.gd")
 const GameConstantsScript = preload("res://scripts/domain/game_constants.gd")
 
+const EffectDslRegressionScript = preload("res://tests/contracts/effect_dsl_regression.gd")
+const ConflictRankingRegressionScript = preload("res://tests/contracts/conflict_ranking_regression.gd")
+const ConflictRewardsRegressionScript = preload("res://tests/contracts/conflict_rewards_regression.gd")
+const SpySystemRegressionScript = preload("res://tests/contracts/spy_system_regression.gd")
+const DeckIntrigueRegressionScript = preload("res://tests/contracts/deck_intrigue_regression.gd")
+const GameStateShapeRegressionScript = preload("res://tests/contracts/game_state_shape_regression.gd")
+
 func run_all_checks() -> Dictionary:
 	var checks: Array = [
 		_check_phase_flow_contract(),
@@ -27,6 +34,21 @@ func run_all_checks() -> Dictionary:
 			return {"ok": false, "reason": "invalid_check_result"}
 		if not bool((result as Dictionary).get("ok", false)):
 			return result
+
+	var mechanics_suites: Array = [
+		EffectDslRegressionScript.new(),
+		ConflictRankingRegressionScript.new(),
+		ConflictRewardsRegressionScript.new(),
+		SpySystemRegressionScript.new(),
+		DeckIntrigueRegressionScript.new(),
+		GameStateShapeRegressionScript.new()
+	]
+	for suite in mechanics_suites:
+		var suite_result: Dictionary = suite.run_all_checks()
+		if typeof(suite_result) != TYPE_DICTIONARY:
+			return {"ok": false, "reason": "mechanics_suite_invalid_result"}
+		if not bool(suite_result.get("ok", false)):
+			return suite_result
 	return {"ok": true}
 
 func run_minimal_checks() -> Dictionary:

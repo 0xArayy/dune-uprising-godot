@@ -4,7 +4,7 @@ const ContractServiceScript = preload("res://scripts/contract_service.gd")
 const DeckServiceScript = preload("res://scripts/deck_service.gd")
 const GameConstantsScript = preload("res://scripts/domain/game_constants.gd")
 const GameCoordinatorScript = preload("res://scripts/application/game_coordinator.gd")
-const RuleContractRegressionScript = preload("res://scripts/testing/rule_contract_regression.gd")
+const RuleContractRegressionScript = preload("res://tests/contracts/rule_contract_regression.gd")
 const HudPresenterScript = preload("res://scripts/presentation/presenters/hud_presenter.gd")
 const MarketPresenterScript = preload("res://scripts/presentation/presenters/market_presenter.gd")
 const ContractsPresenterScript = preload("res://scripts/presentation/presenters/contracts_presenter.gd")
@@ -170,9 +170,9 @@ func _ready():
 	call_deferred("_layout_board_map")
 
 	if run_debug_tests:
-		var runner_script = load("res://scripts/debug_round_runner.gd")
+		var runner_script = load("res://tests/integration/debug_round_runner.gd")
 		if runner_script == null:
-			push_warning("GameRoot: debug runner script not found (res://scripts/debug_round_runner.gd)")
+			push_warning("GameRoot: debug runner script not found (res://tests/integration/debug_round_runner.gd)")
 			return
 
 		var runner = runner_script.new()

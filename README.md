@@ -12,10 +12,10 @@ If you fork or poke around: you’re welcome to learn from it, but don’t treat
 
 - **Data-driven content**: card and board definitions live under `data/` (JSON), so you can grep your way through a rule without hunting every scene.
 - **A real main loop**: main scene is `res://scenes/game_root.tscn` — hotseat flow, UI tied to the same state the rules care about.
-- **Sanity checks**: there’s a headless regression runner for rule-contract checks (`scripts/testing/headless_regression_runner.gd`). From the repo root (with Godot on your `PATH` or using your local binary):
+- **Sanity checks**: there’s a headless regression runner for rule-contract checks (`tests/runners/headless_regression_runner.gd`). From the repo root (with Godot on your `PATH` or using your local binary):
 
   ```bash
-  godot --headless --path game -s res://scripts/testing/headless_regression_runner.gd
+  godot --headless --path game -s res://tests/runners/headless_regression_runner.gd
   ```
 
   If things are fine, you should see `HEADLESS_REGRESSION_OK` in the output.

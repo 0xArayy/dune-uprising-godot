@@ -1,6 +1,6 @@
 extends SceneTree
 
-const RuleContractRegressionScript = preload("res://scripts/testing/rule_contract_regression.gd")
+const RuleContractRegressionScript = preload("res://tests/contracts/rule_contract_regression.gd")
 
 func _initialize() -> void:
 	var regression: RuleContractRegression = RuleContractRegressionScript.new()
