@@ -1,0 +1,27 @@
+[
+  {
+    "id": "objective_crysknife_01",
+    "name": "Crysknife Ambush",
+    "battleIcon": "crysknife"
+  },
+  {
+    "id": "objective_desert_mouse_01",
+    "name": "Desert Recon",
+    "battleIcon": "desert_mouse"
+  },
+  {
+    "id": "objective_ornithopter_01",
+    "name": "Air Superiority",
+    "battleIcon": "ornithopter"
+  },
+  {
+    "id": "objective_crysknife_02",
+    "name": "Knife Line",
+    "battleIcon": "crysknife"
+  },
+  {
+    "id": "objective_desert_mouse_02",
+    "name": "Hidden Tracks",
+    "battleIcon": "desert_mouse"
+  }
+]

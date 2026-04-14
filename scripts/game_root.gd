@@ -15,6 +15,7 @@ const UiIntentRouterScript = preload("res://scripts/presentation/ui_intent_route
 const CardsRepositoryScript = preload("res://scripts/infrastructure/cards_repository.gd")
 const ConflictRepositoryScript = preload("res://scripts/infrastructure/conflict_repository.gd")
 const IntrigueRepositoryScript = preload("res://scripts/infrastructure/intrigue_repository.gd")
+const ObjectiveRepositoryScript = preload("res://scripts/infrastructure/objective_repository.gd")
 
 ## Standard table target for refactored core: 4 players.
 const STARTING_PLAYER_IDS: PackedStringArray = GameConstantsScript.DEFAULT_PLAYER_IDS
@@ -24,6 +25,7 @@ const STARTING_PLAYER_IDS: PackedStringArray = GameConstantsScript.DEFAULT_PLAYE
 
 @export var run_debug_tests := false
 @export var use_refactored_core := true
+@export_range(2, 4, 1) var player_count := 2
 @export var board_padding_left := 18.0
 @export var board_padding_right := 18.0
 @export var board_padding_top := 16.0
@@ -42,6 +44,7 @@ var deck_service := DeckServiceScript.new()
 var cards_repository: CardsRepository = CardsRepositoryScript.new()
 var conflict_repository: ConflictRepository = ConflictRepositoryScript.new()
 var intrigue_repository: IntrigueRepository = IntrigueRepositoryScript.new()
+var objective_repository = ObjectiveRepositoryScript.new()
 var game_state: Dictionary = {}
 var pending_agent_card_id := ""
 var _pending_space_choice_space_id := ""
@@ -75,11 +78,14 @@ func _ready():
 	deck_service.shuffle_array(choam_contract_ids)
 	var choam_setup := ContractServiceScript.build_choam_state(choam_contract_ids)
 	var intrigue_setup := _build_intrigue_setup()
+	var objective_setup := _build_objective_setup()
+	var starting_player_ids: Array = _resolve_starting_player_ids()
 
 	var players: Array = []
-	for seat in range(STARTING_PLAYER_IDS.size()):
-		var pid := str(STARTING_PLAYER_IDS[seat])
+	for seat in range(starting_player_ids.size()):
+		var pid := str(starting_player_ids[seat])
 		players.append(_build_player_state(pid, seat, 2, 0, 1, starter_deck_template))
+	_apply_objective_deal(players, objective_setup)
 
 	game_state = {
 		"id": "local_hotseat_game",
@@ -101,6 +107,8 @@ func _ready():
 		"activeConflictCardId": null,
 		"activeConflictCardDef": null,
 		"conflictCardsById": conflict_setup.get("defs", {}),
+		"objectiveCardsById": objective_setup.get("defs", {}),
+		"objectiveDeck": objective_setup.get("deck", []),
 		"intriguesById": intrigue_setup.get("defs", {}),
 		"intrigueDeck": intrigue_setup.get("deck", []),
 		"intrigueDiscard": [],
@@ -289,6 +297,11 @@ func _on_ui_reveal_pressed():
 		return
 
 	if bool(action_result.get("phaseFinished", false)):
+		# Defensive guard: if phaseFinished is reported but not all players have
+		# actually completed reveal, avoid triggering round pipeline prematurely.
+		if not turn_controller.is_player_turns_phase_finished(game_state):
+			_refresh_ui()
+			return
 		var pipeline = turn_controller.finish_round_pipeline(game_state, board_map)
 		if use_refactored_core:
 			pipeline = game_coordinator.finish_round(game_state, board_map)
@@ -876,6 +889,8 @@ func _build_player_state(player_id, seat_index, agents_available, spice, water, 
 		"completedContracts": 0,
 		"contractsOwned": [],
 		"contractsCompleted": [],
+		"objectiveCards": [],
+		"wonConflictCards": [],
 		"pendingContracts": 0,
 		"turnFlags": {
 			"sent_agent_to_maker_space_this_turn": false,
@@ -887,6 +902,44 @@ func _build_player_state(player_id, seat_index, agents_available, spice, water, 
 		},
 		"passedReveal": false
 	}
+
+func _resolve_starting_player_ids() -> Array:
+	var ids: Array = []
+	var normalized_count := clampi(player_count, 2, STARTING_PLAYER_IDS.size())
+	for i in range(normalized_count):
+		ids.append(str(STARTING_PLAYER_IDS[i]))
+	return ids
+
+func _build_objective_setup() -> Dictionary:
+	var defs: Dictionary = objective_repository.get_all_by_id()
+	var deck: Array = defs.keys()
+	deck.sort()
+	deck_service.shuffle_array(deck)
+	return {"defs": defs, "deck": deck}
+
+func _apply_objective_deal(players: Array, objective_setup: Dictionary) -> void:
+	if typeof(players) != TYPE_ARRAY or players.is_empty():
+		return
+	var defs_raw: Variant = objective_setup.get("defs", {})
+	var defs: Dictionary = defs_raw if typeof(defs_raw) == TYPE_DICTIONARY else {}
+	var deck_raw: Variant = objective_setup.get("deck", [])
+	var deck: Array = deck_raw if typeof(deck_raw) == TYPE_ARRAY else []
+	for player_raw in players:
+		if typeof(player_raw) != TYPE_DICTIONARY:
+			continue
+		var player: Dictionary = player_raw
+		player["objectiveCards"] = []
+		if deck.is_empty():
+			continue
+		var objective_id := str(deck.pop_back())
+		var objective_def_raw: Variant = defs.get(objective_id, {})
+		var objective_def: Dictionary = objective_def_raw if typeof(objective_def_raw) == TYPE_DICTIONARY else {}
+		player["objectiveCards"] = [{
+			"id": objective_id,
+			"battleIcon": str(objective_def.get("battleIcon", "")),
+			"faceUp": true
+		}]
+	objective_setup["deck"] = deck
 
 func _build_starter_deck_template(cards_by_id):
 	var starter_cards: Array = []

@@ -11,6 +11,7 @@ const ConflictRewardsRegressionScript = preload("res://tests/contracts/conflict_
 const SpySystemRegressionScript = preload("res://tests/contracts/spy_system_regression.gd")
 const DeckIntrigueRegressionScript = preload("res://tests/contracts/deck_intrigue_regression.gd")
 const GameStateShapeRegressionScript = preload("res://tests/contracts/game_state_shape_regression.gd")
+const ObjectiveIconMatchRegressionScript = preload("res://tests/contracts/objective_icon_match_regression.gd")
 
 func run_all_checks() -> Dictionary:
 	var checks: Array = [
@@ -41,7 +42,8 @@ func run_all_checks() -> Dictionary:
 		ConflictRewardsRegressionScript.new(),
 		SpySystemRegressionScript.new(),
 		DeckIntrigueRegressionScript.new(),
-		GameStateShapeRegressionScript.new()
+		GameStateShapeRegressionScript.new(),
+		ObjectiveIconMatchRegressionScript.new()
 	]
 	for suite in mechanics_suites:
 		var suite_result: Dictionary = suite.run_all_checks()

@@ -42,6 +42,11 @@ const SPY_GEOMETRIC_MEDIAN_ITERATIONS := 24
 const SPY_GEOMETRIC_MEDIAN_EPSILON := 0.001
 const SHIELD_WALL_START_TEXTURE := preload("res://data/icons/shield_wall_start.png")
 const SHIELD_WALL_DESTROYED_TEXTURE := preload("res://data/icons/shield_wall_destroyed.png")
+const BATTLE_ICON_TEXTURE_PATHS := {
+	"crysknife": "res://data/icons/Crysknife.png",
+	"desert_mouse": "res://data/icons/desert_mouse.png",
+	"ornithopter": "res://data/icons/ornithopter.png"
+}
 const BOARD_SPACE_HALF_SIZE := Vector2(110.0, 55.0)
 const BOARD_SPACE_LINE_PADDING := 2.0
 const CONTROL_MARKER_SPACE_IDS: Array[String] = ["arrakeen", "spice_refinery", "imperial_basin"]
@@ -85,12 +90,14 @@ var effect_resolver
 @onready var second_reward_slot: ConflictRewardSlot = %SecondRewardSlot
 @onready var third_reward_slot: ConflictRewardSlot = %ThirdRewardSlot
 @onready var conflict_rewards_panel: PanelContainer = $ConflictZone/RewardsPanel
+@onready var conflict_battle_icon: TextureRect = %ConflictBattleIcon
 
 ## Default (Siege / shield-wall–blocked conflicts): ochre-mustard like the physical card, not alarm red.
 var _rewards_panel_style_default: StyleBoxFlat
 var _rewards_panel_style_shield_wall: StyleBoxFlat
 var _conflict_reward_slot_style_default: StyleBoxFlat
 var _conflict_reward_slot_style_shield_wall: StyleBoxFlat
+var _battle_icon_texture_cache: Dictionary = {}
 
 const CONFLICT_TITLE_COLOR_DEFAULT := Color(1, 1, 1, 1)
 const CONFLICT_INDEX_COLOR_DEFAULT := Color(0.78, 0.83, 0.92, 0.95)
@@ -2130,6 +2137,7 @@ func _update_conflict_zone_labels(game_state: Dictionary) -> void:
 
 	_apply_conflict_zone_theme_for_sandworm_policy(conflict_card_def)
 	_update_conflict_reward_slots(conflict_card_def)
+	_update_conflict_battle_icon(conflict_card_def)
 
 	var players = game_state.get("players", [])
 	if typeof(players) != TYPE_ARRAY:
@@ -2325,6 +2333,44 @@ func _reward_list_to_tokens(reward_list: Variant, split_cost_to_second_line: boo
 	if first_line_tokens.is_empty():
 		return "\n" + "; ".join(second_line_tokens)
 	return "; ".join(first_line_tokens) + "\n" + "; ".join(second_line_tokens)
+
+func _update_conflict_battle_icon(conflict_card_def: Dictionary) -> void:
+	if conflict_battle_icon == null:
+		return
+	var battle_icons_raw: Variant = conflict_card_def.get("battleIcons", [])
+	if typeof(battle_icons_raw) != TYPE_ARRAY or (battle_icons_raw as Array).is_empty():
+		_hide_conflict_battle_icon()
+		return
+	var icon_id := str((battle_icons_raw as Array)[0]).strip_edges()
+	if icon_id == "":
+		_hide_conflict_battle_icon()
+		return
+	var icon_path := str(BATTLE_ICON_TEXTURE_PATHS.get(icon_id, "")).strip_edges()
+	if icon_path == "":
+		_hide_conflict_battle_icon()
+		return
+	var tex := _load_cached_battle_icon(icon_path)
+	if tex == null:
+		_hide_conflict_battle_icon()
+		return
+	conflict_battle_icon.texture = tex
+	conflict_battle_icon.visible = true
+
+func _hide_conflict_battle_icon() -> void:
+	if conflict_battle_icon == null:
+		return
+	conflict_battle_icon.visible = false
+	conflict_battle_icon.texture = null
+
+func _load_cached_battle_icon(path: String) -> Texture2D:
+	if path == "":
+		return null
+	if _battle_icon_texture_cache.has(path):
+		return _battle_icon_texture_cache[path] as Texture2D
+	var tex := load(path) as Texture2D
+	if tex != null:
+		_battle_icon_texture_cache[path] = tex
+	return tex
 
 func _reward_to_token(reward: Variant) -> String:
 	if typeof(reward) != TYPE_DICTIONARY:

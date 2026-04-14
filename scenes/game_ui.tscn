@@ -118,7 +118,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 10.0
 offset_top = 50.0
-offset_right = 220.0
+offset_right = 290.0
 offset_bottom = 430.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_left_players_panel")
 

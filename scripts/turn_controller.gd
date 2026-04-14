@@ -13,6 +13,7 @@ const ConflictResolutionRulesScript = preload("res://scripts/domain/conflict_res
 const ConflictRewardsServiceScript = preload("res://scripts/domain/services/conflict_rewards_service.gd")
 const PendingConflictServiceScript = preload("res://scripts/domain/services/pending_conflict_service.gd")
 const EndgameResolutionServiceScript = preload("res://scripts/domain/services/endgame_resolution_service.gd")
+const ObjectiveResolutionServiceScript = preload("res://scripts/domain/services/objective_resolution_service.gd")
 const PendingConflictTailServiceScript = preload("res://scripts/application/services/pending_conflict_tail_service.gd")
 const ROUND_HAND_SIZE := 5
 var deck_service := DeckServiceScript.new()
@@ -22,6 +23,7 @@ var conflict_rules := ConflictResolutionRulesScript.new()
 var conflict_rewards := ConflictRewardsServiceScript.new()
 var pending_conflict_service := PendingConflictServiceScript.new()
 var endgame_resolution_service := EndgameResolutionServiceScript.new()
+var objective_resolution_service := ObjectiveResolutionServiceScript.new()
 var pending_conflict_tail_service := PendingConflictTailServiceScript.new()
 var command_handler
 
@@ -714,6 +716,76 @@ func _init_combat_intrigue_round(game_state: Dictionary, conflict_zone: Dictiona
 		"eligiblePlayerIds": ids_variant,
 		"currentPlayerId": first_pid
 	})
+	_auto_pass_forced_combat_intrigue_players(game_state)
+
+func _player_has_playable_combat_intrigue(game_state: Dictionary, player_id: String) -> bool:
+	var player_raw: Variant = _find_player_by_id(game_state, player_id)
+	if typeof(player_raw) != TYPE_DICTIONARY:
+		return false
+	var player: Dictionary = player_raw
+	var intrigue_hand_raw: Variant = player.get("intrigue", [])
+	var intrigue_hand: Array = intrigue_hand_raw if typeof(intrigue_hand_raw) == TYPE_ARRAY else []
+	if intrigue_hand.is_empty():
+		return false
+	var intrigues_by_id_raw: Variant = game_state.get("intriguesById", {})
+	var intrigues_by_id: Dictionary = intrigues_by_id_raw if typeof(intrigues_by_id_raw) == TYPE_DICTIONARY else {}
+	for intrigue_id_raw in intrigue_hand:
+		var intrigue_id := str(intrigue_id_raw).strip_edges()
+		if intrigue_id == "":
+			continue
+		var def_raw: Variant = intrigues_by_id.get(intrigue_id, {})
+		if typeof(def_raw) != TYPE_DICTIONARY:
+			continue
+		if str((def_raw as Dictionary).get("intrigueType", "")).strip_edges().to_lower() == "combat":
+			return true
+	return false
+
+func _auto_pass_forced_combat_intrigue_players(game_state: Dictionary) -> void:
+	var cir_raw: Variant = game_state.get("combatIntrigueRound", {})
+	if typeof(cir_raw) != TYPE_DICTIONARY:
+		return
+	var cir: Dictionary = cir_raw
+	if str(cir.get("status", "")) != "open":
+		return
+	var eligible_raw: Variant = cir.get("eligiblePlayerIds", [])
+	var eligible: Array = eligible_raw if typeof(eligible_raw) == TYPE_ARRAY else []
+	var n := eligible.size()
+	if n <= 0:
+		return
+	var guard := 0
+	while guard < n:
+		guard += 1
+		var idx := int(cir.get("currentIndex", 0))
+		if idx < 0 or idx >= n:
+			idx = 0
+		var player_id := str(eligible[idx])
+		if _player_has_playable_combat_intrigue(game_state, player_id):
+			cir["currentIndex"] = idx
+			cir["currentPlayerId"] = player_id
+			game_state["currentPlayerId"] = player_id
+			game_state["combatIntrigueRound"] = cir
+			return
+		var passes := int(cir.get("consecutivePasses", 0)) + 1
+		_append_log(game_state, {
+			"type": "combat_intrigue_auto_passed",
+			"playerId": player_id,
+			"reason": "no_combat_intrigue_options"
+		})
+		if passes >= n:
+			cir["status"] = "done"
+			cir["consecutivePasses"] = passes
+			game_state["combatIntrigueRound"] = cir
+			_append_log(game_state, {
+				"type": "combat_intrigue_round_completed",
+				"reason": "all_passed_or_no_options"
+			})
+			return
+		var next_idx := (idx + 1) % n
+		cir["currentIndex"] = next_idx
+		cir["consecutivePasses"] = passes
+		cir["currentPlayerId"] = str(eligible[next_idx])
+		game_state["currentPlayerId"] = str(eligible[next_idx])
+		game_state["combatIntrigueRound"] = cir
 
 func play_plot_intrigue(game_state, board_map, intrigue_card_id: String) -> Dictionary:
 	var cur: Variant = _get_current_player(game_state)
@@ -910,6 +982,10 @@ func pass_combat_intrigue(game_state, _board_map) -> Dictionary:
 	cir["currentPlayerId"] = next_pid
 	game_state["combatIntrigueRound"] = cir
 	game_state["currentPlayerId"] = next_pid
+	_auto_pass_forced_combat_intrigue_players(game_state)
+	cir = game_state.get("combatIntrigueRound", {})
+	if str(cir.get("status", "")) == "done":
+		return resolve_conflict_stub(game_state)
 	_append_log(game_state, {
 		"type": "combat_intrigue_passed",
 		"playerId": expected
@@ -964,6 +1040,10 @@ func play_combat_intrigue(game_state, board_map, intrigue_card_id: String) -> Di
 		cir["currentPlayerId"] = next_pid
 		game_state["currentPlayerId"] = next_pid
 	game_state["combatIntrigueRound"] = cir
+	_auto_pass_forced_combat_intrigue_players(game_state)
+	cir = game_state.get("combatIntrigueRound", {})
+	if str(cir.get("status", "")) == "done":
+		return resolve_conflict_stub(game_state)
 	_append_log(game_state, {
 		"type": "combat_intrigue_played",
 		"playerId": expected,
@@ -988,6 +1068,11 @@ func resolve_conflict(game_state):
 		cstatus_pre = str(cir_pre.get("status", "resolved"))
 
 	if cstatus_pre == "open":
+		_auto_pass_forced_combat_intrigue_players(game_state)
+		cir_pre = game_state.get("combatIntrigueRound", {})
+		cstatus_pre = str(cir_pre.get("status", "resolved"))
+		if cstatus_pre == "done":
+			return resolve_conflict_stub(game_state)
 		var cp_open := str(cir_pre.get("currentPlayerId", ""))
 		if cp_open != "":
 			game_state["currentPlayerId"] = cp_open
@@ -1032,6 +1117,9 @@ func resolve_conflict(game_state):
 		third_group = ranking[2]
 
 	var n_participants := participant_power_by_player.size()
+	var unique_winner_id := ""
+	if n_participants > 0 and top_group.size() == 1:
+		unique_winner_id = str(top_group[0])
 	if n_participants == 0:
 		# Nobody committed troops -> nobody receives conflict rewards.
 		pass
@@ -1064,6 +1152,8 @@ func resolve_conflict(game_state):
 	for p_flush in players:
 		if typeof(p_flush) == TYPE_DICTIONARY:
 			_resolve_pending_effects(game_state, p_flush, null, "conflict_reward")
+	if unique_winner_id != "":
+		_apply_objective_battle_icon_logic(game_state, unique_winner_id)
 
 	# Clear per-round conflict totals and revealed strength.
 	game_state["conflictZone"] = {}
@@ -1113,6 +1203,33 @@ func resolve_conflict(game_state):
 	})
 	_bump_state_version(game_state)
 	return {"ok": true, "newPhase": "makers"}
+
+func _apply_objective_battle_icon_logic(game_state: Dictionary, winner_player_id: String) -> void:
+	var winner_raw: Variant = _find_player_by_id(game_state, winner_player_id)
+	if typeof(winner_raw) != TYPE_DICTIONARY:
+		return
+	var winner: Dictionary = winner_raw
+	var conflict_card_id := str(game_state.get("activeConflictCardId", "")).strip_edges()
+	if conflict_card_id == "":
+		return
+	var active_conflict_raw: Variant = game_state.get("activeConflictCardDef", {})
+	var active_conflict: Dictionary = active_conflict_raw if typeof(active_conflict_raw) == TYPE_DICTIONARY else {}
+	var battle_icons_raw: Variant = active_conflict.get("battleIcons", [])
+	var battle_icons: Array = battle_icons_raw if typeof(battle_icons_raw) == TYPE_ARRAY else []
+	if battle_icons.is_empty():
+		return
+	var battle_icon := str(battle_icons[0]).strip_edges()
+	if battle_icon == "":
+		return
+	objective_resolution_service.register_won_conflict_card(winner, conflict_card_id, battle_icon)
+	var match_result: Dictionary = objective_resolution_service.try_resolve_battle_icon_match(winner, game_state, conflict_card_id)
+	_append_log(game_state, {
+		"type": "conflict_card_claimed",
+		"playerId": winner_player_id,
+		"conflictCardId": conflict_card_id,
+		"battleIcon": battle_icon,
+		"objectiveMatched": bool(match_result.get("matched", false))
+	})
 
 func resolve_conflict_stub(game_state):
 	# Backward-compatible alias kept during incremental migration.

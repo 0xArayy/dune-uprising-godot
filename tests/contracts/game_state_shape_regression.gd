@@ -4,6 +4,7 @@ const RuleContractScript = preload("res://scripts/domain/rule_contract.gd")
 
 func run_all_checks() -> Dictionary:
 	var checks: Array = [
+		_check_valid_two_players(),
 		_check_valid_three_players(),
 		_check_valid_four_players(),
 		_check_invalid_players_not_array(),
@@ -18,6 +19,13 @@ func run_all_checks() -> Dictionary:
 			var out: Dictionary = (result as Dictionary).duplicate(true)
 			out["suite"] = "game_state_shape"
 			return out
+	return {"ok": true}
+
+func _check_valid_two_players() -> Dictionary:
+	var gs := {"players": [{"id": "p1"}, {"id": "p2"}], "phase": "round_start"}
+	var r: Dictionary = RuleContractScript.validate_game_state_shape(gs)
+	if not bool(r.get("ok", false)):
+		return {"ok": false, "reason": "valid_two_should_pass", "detail": r}
 	return {"ok": true}
 
 func _three_players() -> Array:
@@ -50,12 +58,12 @@ func _check_invalid_players_not_array() -> Dictionary:
 	return {"ok": true}
 
 func _check_invalid_player_count_low() -> Dictionary:
-	var gs := {"players": [{"id": "p1"}, {"id": "p2"}], "phase": "round_start"}
+	var gs := {"players": [{"id": "p1"}], "phase": "round_start"}
 	var r: Dictionary = RuleContractScript.validate_game_state_shape(gs)
 	if bool(r.get("ok", false)):
-		return {"ok": false, "reason": "two_players_should_fail"}
+		return {"ok": false, "reason": "one_player_should_fail"}
 	if str(r.get("reason", "")) != "players_count_out_of_standard_range":
-		return {"ok": false, "reason": "two_players_wrong_reason", "detail": r}
+		return {"ok": false, "reason": "one_player_wrong_reason", "detail": r}
 	return {"ok": true}
 
 func _check_invalid_player_count_high() -> Dictionary:

@@ -22,7 +22,7 @@ static func validate_game_state_shape(game_state: Dictionary) -> Dictionary:
 	if typeof(players_raw) != TYPE_ARRAY:
 		return {"ok": false, "reason": "players_not_array"}
 	var players: Array = players_raw
-	if players.size() < 3 or players.size() > 4:
+	if players.size() < 2 or players.size() > 4:
 		return {"ok": false, "reason": "players_count_out_of_standard_range"}
 	if str(game_state.get("phase", "")) == "":
 		return {"ok": false, "reason": "missing_phase"}
