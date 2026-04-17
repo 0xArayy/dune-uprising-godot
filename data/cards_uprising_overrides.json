@@ -1,0 +1,267 @@
+{
+  "imperium_bene_gesserit_operative": {
+    "revealEffect": [
+      {"type": "gain_persuasion", "amount": 1},
+      {
+        "type": "if",
+        "requirement": {"type": "has_spies_at_least", "value": 2},
+        "then": [{"type": "gain_persuasion", "amount": 2}],
+        "else": []
+      }
+    ]
+  },
+  "imperium_shishakli": {
+    "agentEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {
+            "label": "trash 1 card -> draw 1 card",
+            "effects": [
+              {"type": "trash_card", "from": ["hand", "discard", "inPlay"], "amount": 1},
+              {"type": "draw_cards", "amount": 1}
+            ]
+          }
+        ]
+      }
+    ],
+    "revealEffect": [
+      {"type": "gain_sword", "amount": 2},
+      {
+        "type": "if",
+        "requirement": {"type": "has_fremen_bond", "value": true},
+        "then": [{"type": "gain_influence", "faction": "fremen", "amount": 1}],
+        "else": []
+      }
+    ]
+  },
+  "imperium_sardaukar_coordination": {
+    "revealEffect": [
+      {"type": "gain_persuasion", "amount": 2},
+      {"type": "gain_sword_per_revealed_tag", "tag": "emperor", "amount": 1, "include_this_card": true}
+    ]
+  },
+  "imperium_interstellar_trade": {
+    "revealEffect": [
+      {"type": "gain_persuasion_per_completed_contract", "amount": 1}
+    ]
+  },
+  "imperium_cargo_runner": {
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {"type": "completed_contracts_at_least", "value": 2},
+        "then": [{"type": "draw_cards", "amount": 1}],
+        "else": []
+      },
+      {
+        "type": "if",
+        "requirement": {"type": "completed_contracts_at_least", "value": 4},
+        "then": [{"type": "draw_cards", "amount": 1}],
+        "else": []
+      }
+    ]
+  },
+  "imperium_weirding_woman": {
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {"type": "has_another_card_in_play_tag", "tag": "beneGesserit", "value": true},
+        "then": [{"type": "return_this_card_to_hand", "amount": 1}],
+        "else": []
+      }
+    ]
+  },
+  "imperium_subversive_advisor": {
+    "agentEffectRenderMode": "text_only",
+    "agentEffectTextOverride": "If you sent an Agent to a Faction board space this turn, gain two Influence instead of one and trash this card.",
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {"type": "sent_agent_to_faction_space_this_turn", "value": true},
+        "then": [
+          {"type": "gain_influence", "faction": "anyone", "amount": 2},
+          {"type": "trash_this_card", "amount": 1}
+        ],
+        "else": [{"type": "gain_influence", "faction": "anyone", "amount": 1}]
+      }
+    ]
+  },
+  "imperium_leadership": {
+    "agentEffect": [
+      {"type": "draw_cards_per_sandworm_in_conflict", "amount": 1}
+    ]
+  },
+  "imperium_undercover_asset": {
+    "revealEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {"label": "gain 1 spy", "effects": [{"type": "place_spy", "amount": 1}]},
+          {"label": "gain 2 swords", "effects": [{"type": "gain_sword", "amount": 2}]}
+        ]
+      }
+    ]
+  },
+  "imperium_sardaukar_soldier": {
+    "purchaseBonus": []
+  },
+  "imperium_desert_survival": {
+    "agentEffect": [
+      {"type": "trash_card", "from": ["hand", "discard", "inPlay"], "amount": 1}
+    ]
+  },
+  "imperium_calculus_of_power": {
+    "agentEffect": [
+      {"type": "trash_card", "from": ["hand", "discard", "inPlay"], "amount": 1}
+    ]
+  },
+  "imperium_tread_in_darkness": {
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {"type": "has_another_card_in_play_tag", "tag": "beneGesserit", "value": true},
+        "then": [
+          {
+            "type": "choice",
+            "options": [
+              {
+                "label": "trash 1 card -> draw 1 card",
+                "effects": [
+                  {"type": "trash_card", "from": ["hand", "discard", "inPlay"], "amount": 1},
+                  {"type": "draw_cards", "amount": 1}
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ]
+  },
+  "imperium_spacing_guild_s_favor": {
+    "onDiscardEffects": [
+      {"type": "gain_resource", "resource": "spice", "amount": 2}
+    ]
+  },
+  "imperium_covert_operation": {
+    "agentEffect": [
+      {"type": "opponents_discard_card", "amount": 1}
+    ]
+  },
+  "imperium_wheels_within_wheels": {
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {"type": "min_influence", "faction": "emperor", "value": 2},
+        "then": [{"type": "gain_resource", "resource": "solari", "amount": 2}],
+        "else": []
+      },
+      {
+        "type": "if",
+        "requirement": {"type": "min_influence", "faction": "guild", "value": 2},
+        "then": [{"type": "gain_resource", "resource": "spice", "amount": 1}],
+        "else": []
+      }
+    ]
+  },
+  "imperium_guild_envoy": {
+    "agentEffect": [
+      {"type": "discard_card", "from": "hand", "amount": 1},
+      {
+        "type": "if",
+        "requirement": {"type": "discarded_card_has_tag", "tag": "guild", "value": true},
+        "then": [{"type": "draw_cards", "amount": 2}],
+        "else": []
+      }
+    ]
+  },
+  "imperium_paracompass": {
+    "revealEffect": [
+      {
+        "type": "if",
+        "requirement": {"type": "flag", "key": "has_high_council_seat", "value": true},
+        "then": [
+          {"type": "gain_persuasion", "amount": 2},
+          {
+            "type": "if",
+            "requirement": {"type": "has_swordmaster", "value": true},
+            "then": [{"type": "gain_persuasion", "amount": 1}],
+            "else": []
+          }
+        ],
+        "else": []
+      }
+    ]
+  },
+  "imperium_chani_clever_tactician": {
+    "agentEffect": [
+      {
+        "type": "if",
+        "requirement": {"type": "units_in_conflict_at_least", "value": 3},
+        "then": [{"type": "draw_intrigue", "amount": 1}],
+        "else": []
+      }
+    ],
+    "revealEffect": [
+      {
+        "type": "choice",
+        "options": [
+          {"label": "do not retreat troops", "effects": []},
+          {
+            "label": "retreat 2 troops -> gain 4 swords",
+            "effects": [
+              {"type": "retreat_from_conflict", "amount": 2},
+              {"type": "gain_sword", "amount": 4}
+            ]
+          }
+        ]
+      },
+      {
+        "type": "if",
+        "requirement": {"type": "has_fremen_bond", "value": true},
+        "then": [{"type": "gain_persuasion", "amount": 2}],
+        "else": []
+      }
+    ]
+  },
+  "imperium_spy_network": {
+    "revealEffect": [
+      {"type": "gain_persuasion", "amount": 2},
+      {"type": "gain_sword", "amount": 1},
+      {
+        "type": "if",
+        "requirement": {"type": "has_spies_at_least", "value": 2},
+        "then": [
+          {
+            "type": "choice",
+            "options": [
+              {"label": "do not recall spy", "effects": []},
+              {
+                "label": "recall a spy -> draw 1 intrigue",
+                "effects": [
+                  {
+                    "type": "recall_spy_for_effect",
+                    "amount": 1,
+                    "rewardEffects": [{"type": "draw_intrigue", "amount": 1}]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "else": []
+      }
+    ]
+  },
+  "imperium_stilgar_the_devoted": {
+    "revealEffect": [
+      {"type": "gain_persuasion_per_revealed_tag", "tag": "fremen", "amount": 2, "include_this_card": true}
+    ]
+  },
+  "imperium_price_is_no_object": {
+    "purchaseBonus": [
+      {"type": "gain_resource", "resource": "solari", "amount": 2}
+    ]
+  }
+}

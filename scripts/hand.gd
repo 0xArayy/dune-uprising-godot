@@ -2,6 +2,7 @@ class_name Hand
 extends HBoxContainer
 
 signal card_play_requested(card_id: String)
+signal card_inspect_requested(card_data: Dictionary)
 
 const CARD_UI_SCENE := preload("res://scenes/card_ui.tscn")
 var _cards_interactable := true
@@ -51,8 +52,12 @@ func _on_card_ui_play_requested(card_id: String, _card_ui: CardUI) -> void:
 func _create_card_ui(card_id: String, card_def: Dictionary) -> CardUI:
 	var new_card_ui := CARD_UI_SCENE.instantiate() as CardUI
 	new_card_ui.play_requested.connect(_on_card_ui_play_requested.bind(new_card_ui))
+	new_card_ui.inspect_requested.connect(_on_card_ui_inspect_requested.bind(new_card_ui))
 	_rebind_card_ui(new_card_ui, card_id, card_def)
 	return new_card_ui
+
+func _on_card_ui_inspect_requested(card_payload: Dictionary, _card_ui: CardUI) -> void:
+	card_inspect_requested.emit(card_payload)
 
 func _rebind_card_ui(card_ui: CardUI, card_id: String, card_def: Dictionary) -> void:
 	var ui_data: Dictionary = card_def.duplicate(true)

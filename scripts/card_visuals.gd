@@ -3,19 +3,19 @@ extends Control
 
 @export var card_data: Dictionary : set = set_card_data
 
-@onready var name_label: Label = $Panel/VBox/Header/Name
+@onready var name_label: Label = %Name
 @onready var cost_label: Label = %CostValue
-@onready var icons_label: Label = $Panel/VBox/Icons
+@onready var icons_label: Label = $Panel/MainMargin/VBox/Icons
 @onready var purchase_bonus_row: HBoxContainer = %PurchaseBonusOverlayRow
 @onready var agent_icons_column: VBoxContainer = %AgentIconsColumn
-@onready var agent_effect_label: Label = $Panel/VBox/AgentRow/AgentEffectBlock/AgentEffectMargin/AgentEffectVBox/AgentEffectContent/AgentEffect
-@onready var reveal_effect_label: Label = $Panel/VBox/RevealEffectBlock/RevealEffectMargin/RevealEffectVBox/RevealEffectContent/RevealEffect
+@onready var agent_effect_label: Label = %AgentEffect
+@onready var reveal_effect_label: Label = %RevealEffect
 @onready var agent_effect_tokens_row: HBoxContainer = %AgentEffectTokens
 @onready var reveal_effect_tokens_row: HBoxContainer = %RevealEffectTokens
 @onready var agent_persuasion_badge: Control = %AgentPersuasionBadge
 @onready var reveal_persuasion_badge: Control = %RevealPersuasionBadge
-@onready var agent_persuasion_value: Label = $Panel/VBox/AgentRow/AgentEffectBlock/AgentEffectMargin/AgentEffectVBox/AgentEffectContent/AgentPersuasionBadge/BadgeValue
-@onready var reveal_persuasion_value: Label = $Panel/VBox/RevealEffectBlock/RevealEffectMargin/RevealEffectVBox/RevealEffectContent/RevealPersuasionBadge/BadgeValue
+@onready var agent_persuasion_value: Label = %AgentPersuasionBadge/BadgeValue
+@onready var reveal_persuasion_value: Label = %RevealPersuasionBadge/BadgeValue
 @onready var agent_sword_icons: HBoxContainer = %AgentSwordIcons
 @onready var reveal_sword_icons: HBoxContainer = %RevealSwordIcons
 @onready var agent_draw_icons: HBoxContainer = %AgentDrawIcons
@@ -25,9 +25,9 @@ extends Control
 @onready var reveal_intrigue_icons: HBoxContainer = %RevealIntrigueIcons
 @onready var reveal_trash_icons: HBoxContainer = %RevealTrashIcons
 @onready var agent_troops_badge: Control = %AgentTroopsBadge
-@onready var agent_troops_value: Label = $Panel/VBox/AgentRow/AgentEffectBlock/AgentEffectMargin/AgentEffectVBox/AgentEffectContent/AgentTroopsBadge/BadgeValue
+@onready var agent_troops_value: Label = %AgentTroopsBadge/BadgeValue
 @onready var reveal_troops_badge: Control = %RevealTroopsBadge
-@onready var reveal_troops_value: Label = $Panel/VBox/RevealEffectBlock/RevealEffectMargin/RevealEffectVBox/RevealEffectContent/RevealTroopsBadge/BadgeValue
+@onready var reveal_troops_value: Label = %RevealTroopsBadge/BadgeValue
 @onready var agent_resource_badges: HBoxContainer = %AgentResourceBadges
 @onready var reveal_resource_badges: HBoxContainer = %RevealResourceBadges
 
@@ -52,12 +52,15 @@ const VP_ICON_PATH := "res://data/icons/vp.png"
 const MIN_NAME_FONT_SIZE := 11
 const EFFECT_ICON_SIZE_AGENT := Vector2(22, 22)
 const EFFECT_ICON_SIZE_REVEAL := Vector2(22, 22)
+const MIN_AGENT_ICON_SIZE := 12.0
+const MAX_AGENT_ICON_SIZE := 22.4
 const EFFECT_TOKEN_SCALE := 1.0
 const EFFECT_MAX_REPEAT_ICONS := 1
 const EFFECT_CONTENT_SCALE_STEPS := [0.72, 0.64, 0.56, 0.50]
 const EFFECT_STRIP_INNER_HEIGHT_AGENT := 24.0
 const EFFECT_STRIP_INNER_HEIGHT_REVEAL := 28.0
 const EffectTextTokensScript = preload("res://scripts/domain/effect_text_tokens.gd")
+const CardEffectPresentationScript = preload("res://scripts/domain/card_effect_presentation.gd")
 static var _texture_cache: Dictionary = {}
 
 func set_card_data(value: Dictionary) -> void:
@@ -83,6 +86,8 @@ func _render() -> void:
 	_render_purchase_bonus(purchase_bonus)
 	_render_effect_block(
 		agent_effects,
+		str(card_data.get("agentEffectRenderMode", "")),
+		str(card_data.get("agentEffectTextOverride", "")),
 		agent_persuasion_badge,
 		agent_persuasion_value,
 		agent_troops_badge,
@@ -98,6 +103,8 @@ func _render() -> void:
 	)
 	_render_effect_block(
 		reveal_effects,
+		str(card_data.get("revealEffectRenderMode", "")),
+		str(card_data.get("revealEffectTextOverride", "")),
 		reveal_persuasion_badge,
 		reveal_persuasion_value,
 		reveal_troops_badge,
@@ -154,6 +161,8 @@ func _fit_name_font_size() -> void:
 
 func _render_effect_block(
 	effects: Variant,
+	render_mode: String,
+	text_override: String,
 	badge: Control,
 	badge_value: Label,
 	troops_badge: Control,
@@ -165,73 +174,30 @@ func _render_effect_block(
 	resource_badges_container: HBoxContainer,
 	text_label: Label,
 	text_tokens_row: HBoxContainer,
-	icon_size: Vector2
+	_icon_size: Vector2
 ) -> void:
-	var text_without_icons := _effects_to_text(effects, true, true, true, true, true, true, true, true, true, true, true, true, true, true)
-	var strip_inner_height := EFFECT_STRIP_INNER_HEIGHT_AGENT if icon_size.y <= EFFECT_ICON_SIZE_AGENT.y else EFFECT_STRIP_INNER_HEIGHT_REVEAL
-	var content_scale := _resolve_effect_content_scale(effects, text_without_icons, strip_inner_height)
-	var render_icon_size: Vector2 = _scaled_icon_size(icon_size, content_scale)
-	var max_repeat_icons := EFFECT_MAX_REPEAT_ICONS
-	var token_scale := EFFECT_TOKEN_SCALE * content_scale
+	_clear_container(sword_container)
+	_clear_container(draw_cards_container)
+	_clear_container(intrigue_icons_container)
+	_clear_container(trash_icons_container)
+	_clear_container(resource_badges_container)
+	badge.visible = false
+	badge_value.text = ""
+	troops_badge.visible = false
+	troops_value.text = ""
+	if text_tokens_row != null:
+		_clear_container(text_tokens_row)
+		text_tokens_row.visible = false
 
-	var persuasion_amount := _extract_effect_amount(effects, "gain_persuasion")
-	if persuasion_amount > 0:
-		badge.visible = true
-		badge_value.text = str(persuasion_amount)
-	else:
-		badge.visible = false
-		badge_value.text = ""
-
-	var troops_amount := _extract_effect_amount(effects, "recruit_troops")
-	if troops_amount > 0:
-		troops_badge.visible = true
-		troops_value.text = str(troops_amount)
-	else:
-		troops_badge.visible = false
-		troops_value.text = ""
-
-	var sword_amount := _extract_effect_amount(effects, "gain_sword")
-	var icons_overflowed := _render_sword_icons(sword_container, sword_amount, render_icon_size, max_repeat_icons, content_scale)
-	var draw_cards_amount := _extract_effect_amount(effects, "draw_cards")
-	icons_overflowed = _render_repeat_texture_icons(draw_cards_container, draw_cards_amount, render_icon_size, DRAW_CARD_ICON_PATH, max_repeat_icons, content_scale) or icons_overflowed
-	var intrigue_amount := _extract_effect_amount(effects, "draw_intrigue")
-	icons_overflowed = _render_repeat_texture_icons(intrigue_icons_container, intrigue_amount, render_icon_size, INTRIGUE_ICON_PATH, max_repeat_icons, content_scale) or icons_overflowed
-	var trash_amount := _extract_effect_amount(effects, "trash_card")
-	icons_overflowed = _render_repeat_texture_icons(trash_icons_container, trash_amount, render_icon_size, TRASH_CARD_ICON_PATH, max_repeat_icons, content_scale) or icons_overflowed
-	var numeric_render_result := _render_numeric_effect_badges(resource_badges_container, effects, render_icon_size, badge_value, max_repeat_icons)
-	var numeric_icons_rendered := bool(numeric_render_result.get("rendered", false))
-	icons_overflowed = bool(numeric_render_result.get("overflowed", false)) or icons_overflowed
-
-	var has_any_icons := (
-		persuasion_amount > 0
-		or troops_amount > 0
-		or sword_amount > 0
-		or draw_cards_amount > 0
-		or intrigue_amount > 0
-		or trash_amount > 0
-		or numeric_icons_rendered
-	)
-	var should_use_text_fallback := icons_overflowed and text_without_icons.length() > 0
-	if should_use_text_fallback:
-		if text_tokens_row != null:
-			# Keep token rendering active in fallback mode so badges/cost trades
-			# (e.g. spice payment -> reward) render as icons, not raw token text.
-			EffectsTokenRow.populate(text_tokens_row, _compact_effect_text(_effects_to_text(effects)), token_scale)
-			text_tokens_row.visible = true
-		text_label.visible = false
-		text_label.text = ""
+	if render_mode == "text_only":
+		text_label.text = text_override.strip_edges()
+		text_label.visible = text_label.text != ""
 		return
 
-	if text_tokens_row != null:
-		var tokens_or_text := text_without_icons
-		if tokens_or_text == "" and not has_any_icons:
-			tokens_or_text = _compact_effect_text(_effects_to_text(effects))
-		EffectsTokenRow.populate(text_tokens_row, tokens_or_text, token_scale)
-		text_tokens_row.visible = tokens_or_text != ""
-
-	if text_without_icons == "" and has_any_icons:
-		text_label.visible = false
-		text_label.text = ""
+	var presentation: Dictionary = CardEffectPresentationScript.build(effects)
+	var full_tokens := str(presentation.get("tokens_full", ""))
+	text_label.text = _compact_effect_text(full_tokens)
+	text_label.visible = text_label.text != ""
 
 func _scaled_icon_size(base: Vector2, icon_scale: float) -> Vector2:
 	return Vector2(maxf(14.0, base.x * icon_scale), maxf(14.0, base.y * icon_scale))
@@ -263,6 +229,35 @@ func _resolve_effect_content_scale(effects: Variant, text_without_icons: String,
 		return minf(float(EFFECT_CONTENT_SCALE_STEPS[0]), max_scale_by_height)
 	return minf(float(EFFECT_CONTENT_SCALE_STEPS[0]), max_scale_by_height)
 
+func _resolve_effect_content_scale_with_model(
+	guaranteed: Dictionary,
+	complexity: Dictionary,
+	text_without_icons: String,
+	strip_inner_height: float
+) -> float:
+	var score := 0
+	score += int(guaranteed.get("sword", 0))
+	score += int(guaranteed.get("draw_cards", 0))
+	score += int(guaranteed.get("draw_intrigue", 0))
+	score += int(guaranteed.get("trash_card", 0))
+	score += int(guaranteed.get("place_spy", 0))
+	score += int(guaranteed.get("get_contract", 0))
+	score += int(guaranteed.get("summon_sandworm", 0))
+	score += int(guaranteed.get("persuasion", 0))
+	score += int(guaranteed.get("troops", 0))
+	score += int(complexity.get("branch_nodes", 0)) * 2
+	score += int(complexity.get("max_depth", 0))
+	score += mini(int(floor(float(text_without_icons.length()) / 18.0)), 6)
+	var base_icon_height := 22.0
+	var max_scale_by_height := clampf(strip_inner_height / base_icon_height, 0.6, 1.0)
+	if score >= 20:
+		return minf(float(EFFECT_CONTENT_SCALE_STEPS[3]), max_scale_by_height)
+	if score >= 15:
+		return minf(float(EFFECT_CONTENT_SCALE_STEPS[2]), max_scale_by_height)
+	if score >= 11:
+		return minf(float(EFFECT_CONTENT_SCALE_STEPS[1]), max_scale_by_height)
+	return minf(float(EFFECT_CONTENT_SCALE_STEPS[0]), max_scale_by_height)
+
 func _compact_effect_text(text: String) -> String:
 	var normalized := text.strip_edges()
 	if normalized == "":
@@ -273,7 +268,7 @@ func _compact_effect_text(text: String) -> String:
 
 func _render_numeric_effect_badges(
 	container: HBoxContainer,
-	effects: Variant,
+	guaranteed: Dictionary,
 	icon_size: Vector2,
 	reference_value_label: Label,
 	max_repeat_icons: int
@@ -282,7 +277,7 @@ func _render_numeric_effect_badges(
 	var rendered := false
 	var overflowed := false
 
-	var amounts := _extract_resource_amounts(effects)
+	var amounts: Dictionary = guaranteed.get("resources", {})
 	for resource_id in ["solari", "spice", "water"]:
 		var amount := int(amounts.get(resource_id, 0))
 		if amount == 0:
@@ -294,7 +289,7 @@ func _render_numeric_effect_badges(
 			continue
 		rendered = true
 
-	var influence_amounts := _extract_influence_amounts(effects)
+	var influence_amounts: Dictionary = guaranteed.get("influence", {})
 	for faction_id in ["emperor", "guild", "beneGesserit", "fremen"]:
 		var amount := int(influence_amounts.get(faction_id, 0))
 		if amount == 0:
@@ -307,22 +302,20 @@ func _render_numeric_effect_badges(
 			if amount > max_repeat_icons:
 				overflowed = true
 
-	var vp_amount := _extract_effect_amount(effects, "vp")
+	var vp_amount := int(guaranteed.get("vp", 0))
 	if vp_amount != 0 and _add_numeric_icon_badge(container, VP_ICON_PATH, vp_amount, icon_size, reference_value_label):
 		rendered = true
-	if _render_maker_space_conditional_badges(container, effects, icon_size, reference_value_label):
-		rendered = true
-	var contract_amount := _extract_effect_amount(effects, "get_contract")
+	var contract_amount := int(guaranteed.get("get_contract", 0))
 	if contract_amount > 0 and _add_icon_only_badges(container, CONTRACT_ICON_PATH, contract_amount, icon_size, max_repeat_icons):
 		rendered = true
 		if contract_amount > max_repeat_icons:
 			overflowed = true
-	var spy_amount := _extract_effect_amount(effects, "place_spy")
+	var spy_amount := int(guaranteed.get("place_spy", 0))
 	if spy_amount > 0 and _add_icon_only_badges(container, SPY_ICON_PATH, spy_amount, icon_size, max_repeat_icons):
 		rendered = true
 		if spy_amount > max_repeat_icons:
 			overflowed = true
-	var sand_worm_amount := _extract_effect_amount(effects, "summon_sandworm")
+	var sand_worm_amount := int(guaranteed.get("summon_sandworm", 0))
 	if sand_worm_amount > 0 and _add_icon_only_badges(container, SAND_WORM_ICON_PATH, sand_worm_amount, icon_size, max_repeat_icons):
 		rendered = true
 		if sand_worm_amount > max_repeat_icons:
@@ -520,18 +513,33 @@ func _render_agent_icons(icons: Variant) -> void:
 	if typeof(icons) != TYPE_ARRAY or icons.is_empty():
 		return
 
+	var icons_array: Array = icons
+	var icon_side := _resolve_agent_icon_side(icons_array.size())
 	for icon_raw in icons:
 		var icon_id := _normalize_icon_id(str(icon_raw))
 		var texture := _load_icon_texture(icon_id)
 		if texture == null:
 			continue
 		var icon_rect := TextureRect.new()
-		icon_rect.custom_minimum_size = ICON_SIZE
+		icon_rect.custom_minimum_size = Vector2(icon_side, icon_side)
 		icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon_rect.texture = texture
 		icon_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		agent_icons_column.add_child(icon_rect)
+
+func _resolve_agent_icon_side(icon_count: int) -> float:
+	if icon_count <= 0:
+		return MAX_AGENT_ICON_SIZE
+	var available_height := agent_icons_column.size.y
+	if available_height <= 0.0:
+		available_height = agent_icons_column.get_parent_control().size.y if agent_icons_column.get_parent_control() != null else 88.0
+	if available_height <= 0.0:
+		available_height = 88.0
+	var spacing := float(agent_icons_column.get_theme_constant("separation"))
+	var total_spacing := maxf(float(icon_count - 1) * spacing, 0.0)
+	var side := (available_height - total_spacing) / float(icon_count)
+	return clampf(side, MIN_AGENT_ICON_SIZE, MAX_AGENT_ICON_SIZE)
 
 func _load_icon_texture(icon_id: String) -> Texture2D:
 	var png_path := ICON_DIR + icon_id + ".png"
@@ -560,7 +568,8 @@ func _normalize_icon_id(icon_id: String) -> String:
 
 func _clear_container(node: Node) -> void:
 	for child in node.get_children():
-		child.queue_free()
+		node.remove_child(child)
+		child.free()
 
 func _effects_to_text(
 	effects: Variant,
@@ -669,6 +678,47 @@ func _add_compact_count_label(container: HBoxContainer, count: int, content_scal
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.add_theme_font_size_override("font_size", maxi(int(round(10.0 * content_scale)), 8))
 	container.add_child(label)
+
+func _resolve_strip_budget_width(container: HBoxContainer) -> float:
+	if container == null:
+		return 96.0
+	var width := container.size.x
+	if width <= 0.0 and container.get_parent_control() != null:
+		width = container.get_parent_control().size.x
+	if width <= 0.0:
+		width = 96.0
+	return width
+
+func _trim_container_to_width(container: HBoxContainer, max_width: float) -> void:
+	if container == null:
+		return
+	var budget := maxf(max_width, 42.0)
+	while _measure_container_width(container) > budget and container.get_child_count() > 0:
+		var last := container.get_child(container.get_child_count() - 1)
+		container.remove_child(last)
+		last.free()
+
+func _measure_container_width(container: HBoxContainer) -> float:
+	var total := 0.0
+	var sep := float(container.get_theme_constant("separation"))
+	for idx in range(container.get_child_count()):
+		var child := container.get_child(idx)
+		total += _measure_node_width(child)
+		if idx < container.get_child_count() - 1:
+			total += sep
+	return total
+
+func _measure_node_width(node: Node) -> float:
+	if node is Control:
+		var control := node as Control
+		if control.custom_minimum_size.x > 0.0:
+			return control.custom_minimum_size.x
+		if control.size.x > 0.0:
+			return control.size.x
+		if control is Label:
+			var label := control as Label
+			return maxf(float(label.text.length()) * 6.0, 10.0)
+	return 10.0
 
 func _load_cached_texture(path: String) -> Texture2D:
 	if path == "":

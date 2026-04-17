@@ -306,7 +306,13 @@ func _on_ui_reveal_pressed():
 		if use_refactored_core:
 			pipeline = game_coordinator.finish_round(game_state, board_map)
 		if not bool(pipeline.get("ok", false)):
-			push_warning("Round pipeline failed: %s" % str(pipeline))
+			var detail_raw: Variant = pipeline.get("detail", {})
+			var detail: Dictionary = detail_raw if typeof(detail_raw) == TYPE_DICTIONARY else {}
+			var reason := str(detail.get("reason", ""))
+			# "phase_not_finished" can appear in normal UI race windows while reveal/end-turn
+			# intents are processed; avoid noisy warning spam for this expected case.
+			if reason != "phase_not_finished":
+				push_warning("Round pipeline failed: %s" % str(pipeline))
 
 	_refresh_ui()
 

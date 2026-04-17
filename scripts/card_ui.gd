@@ -2,6 +2,7 @@ class_name CardUI
 extends Control
 
 signal play_requested(card_id: String)
+signal inspect_requested(card_data: Dictionary)
 
 @export var card_data: Dictionary : set = set_card_data
 @export var disabled := false
@@ -30,6 +31,10 @@ func _gui_input(event: InputEvent) -> void:
 	if event is not InputEventMouseButton:
 		return
 	var button_event := event as InputEventMouseButton
+	if button_event.button_index == MOUSE_BUTTON_RIGHT and button_event.pressed:
+		inspect_requested.emit(card_data.duplicate(true))
+		accept_event()
+		return
 	if disabled:
 		return
 	if button_event.button_index != MOUSE_BUTTON_LEFT:

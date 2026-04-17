@@ -6,6 +6,9 @@ const MARKET_CARD_UI_SCENE := preload("res://scenes/card_ui.tscn")
 const BoardSpacesRepositoryScript := preload("res://scripts/infrastructure/board_spaces_repository.gd")
 const IntrigueEffectTextScript = preload("res://scripts/intrigue_effect_text.gd")
 const MARKET_ROW_MAX_CARDS := 5
+const MARKET_CARD_WIDTH := 180.0
+const MARKET_CARD_HEIGHT := 252.0
+const MARKET_ROW_SEPARATION := 8.0
 
 @onready var round_label: Label = %RoundLabel
 @onready var player_label: Label = %CurrentPlayerLabel
@@ -50,6 +53,7 @@ const MARKET_ROW_MAX_CARDS := 5
 @onready var top_panel: Control = $TopPanel
 @onready var left_players_panel: Control = $LeftPlayersPanel
 @onready var players_table_rows: VBoxContainer = %PlayersTableRows
+@onready var card_inspector_popup: CardInspectorPopup = %CardInspectorPopup
 
 var _last_bound_state: Dictionary = {}
 var _pending_hand_cards: Array = []
@@ -90,6 +94,7 @@ func _ready():
 	choam_details_button.pressed.connect(_on_choam_details_pressed)
 	choam_popup_close_button.pressed.connect(_on_choam_popup_close_pressed)
 	hand.card_play_requested.connect(_on_hand_card_play_requested)
+	hand.card_inspect_requested.connect(_on_card_inspect_requested)
 	_setup_space_choice_visuals()
 	_setup_intrigue_view_button()
 	_setup_intrigue_controls_row()
@@ -477,13 +482,14 @@ func _add_market_cards_grid(
 		return
 	if card_ids.is_empty():
 		return
+	var cards_per_row := _resolve_market_cards_per_row()
 	var current_row: HBoxContainer = null
 	for i in range(card_ids.size()):
-		if i % MARKET_ROW_MAX_CARDS == 0:
+		if i % cards_per_row == 0:
 			current_row = HBoxContainer.new()
 			current_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			current_row.alignment = BoxContainer.ALIGNMENT_BEGIN
-			current_row.add_theme_constant_override("separation", 10)
+			current_row.add_theme_constant_override("separation", int(MARKET_ROW_SEPARATION))
 			parent.add_child(current_row)
 		var card_id := card_ids[i]
 		var card_def: Variant = cards_by_id.get(card_id, {})
@@ -496,12 +502,13 @@ func _build_market_card_slot(card_id: String, card_def: Variant, persuasion: int
 		return null
 	var cost := int(card_def.get("cost", 0))
 	var slot := VBoxContainer.new()
-	slot.custom_minimum_size = Vector2(144, 0)
+	slot.custom_minimum_size = Vector2(MARKET_CARD_WIDTH, 0)
 	slot.add_theme_constant_override("separation", 6)
 
 	var card_ui := MARKET_CARD_UI_SCENE.instantiate() as CardUI
-	card_ui.custom_minimum_size = Vector2(144, 216)
+	card_ui.custom_minimum_size = Vector2(MARKET_CARD_WIDTH, MARKET_CARD_HEIGHT)
 	card_ui.disabled = true
+	card_ui.inspect_requested.connect(_on_card_inspect_requested)
 	var ui_data: Dictionary = card_def.duplicate(true)
 	ui_data["id"] = card_id
 	card_ui.card_data = ui_data
@@ -513,6 +520,15 @@ func _build_market_card_slot(card_id: String, card_def: Variant, persuasion: int
 	buy_button.pressed.connect(_on_market_buy_pressed.bind(card_id))
 	slot.add_child(buy_button)
 	return slot
+
+func _resolve_market_cards_per_row() -> int:
+	var available := 720.0
+	if market_panel != null and market_panel.size.x > 0.0:
+		# Match MarketMargin horizontal paddings (6 + 6) for exact 5-card fit.
+		available = market_panel.size.x - 12.0
+	var per_row := int(floor((available + MARKET_ROW_SEPARATION) / (MARKET_CARD_WIDTH + MARKET_ROW_SEPARATION)))
+	per_row = clampi(per_row, 1, MARKET_ROW_MAX_CARDS)
+	return per_row
 
 func _set_buttons_disabled_recursive(node: Node, disabled_value: bool) -> void:
 	if node is Button:
@@ -537,6 +553,12 @@ func _on_cancel_selection_pressed() -> void:
 
 func _on_hand_card_play_requested(card_id: String) -> void:
 	GameEvents.ui_intent_card_play.emit(card_id)
+
+func _on_card_inspect_requested(card_payload: Dictionary) -> void:
+	if card_inspector_popup == null:
+		return
+	move_child(card_inspector_popup, get_child_count() - 1)
+	card_inspector_popup.show_card(card_payload)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("ui_cancel"):
@@ -580,6 +602,9 @@ func _close_topmost_popup() -> bool:
 		return true
 	if choam_popup != null and choam_popup.visible:
 		_close_popup(choam_popup)
+		return true
+	if card_inspector_popup != null and card_inspector_popup.visible:
+		card_inspector_popup.hide_popup()
 		return true
 	if deck_view_popup != null and deck_view_popup.visible:
 		_close_popup(deck_view_popup)

@@ -132,8 +132,15 @@ static func effect_to_text_board(effect: Variant, space_area_id: String = "") ->
 
 
 static func choice_to_text_board(effect: Dictionary, space_area_id: String = "") -> String:
-	if is_influence_choice(effect):
-		return "[influence_icon]"
+	var high_council_choice := extract_high_council_seat_choice(effect)
+	if bool(high_council_choice.get("ok", false)):
+		return "[high_council_choice:gain%d:pay%d]" % [
+			int(high_council_choice.get("gain_solari", 0)),
+			int(high_council_choice.get("pay_solari", 0))
+		]
+	var influence_choice_amount := get_influence_choice_amount(effect)
+	if influence_choice_amount > 0:
+		return _anyone_influence_icon_token(influence_choice_amount)
 	if is_spice_refinery_trade_choice(effect):
 		return "[spice_refinery_trade]"
 	if is_gather_support_trade_choice(effect):
@@ -189,6 +196,8 @@ static func requirement_to_text_board(requirement: Variant) -> String:
 	match req_type:
 		"min_influence":
 			return "influence(%s) >= %d" % [str(requirement.get("faction", "")), int(requirement.get("value", 0))]
+		"has_alliance":
+			return "alliance(%s)" % str(requirement.get("faction", ""))
 		"has_maker_hooks":
 			return "maker_hooks == %s" % str(bool(requirement.get("value", true)))
 		"flag":
@@ -199,28 +208,37 @@ static func requirement_to_text_board(requirement: Variant) -> String:
 			return req_type
 
 
-static func is_influence_choice(effect: Dictionary) -> bool:
+static func get_influence_choice_amount(effect: Dictionary) -> int:
 	var options = effect.get("options", [])
 	if typeof(options) != TYPE_ARRAY or options.size() != 4:
-		return false
+		return 0
 	var expected_factions := ["emperor", "guild", "beneGesserit", "fremen"]
+	var detected_amount := -1
 	for option in options:
 		if typeof(option) != TYPE_DICTIONARY:
-			return false
+			return 0
 		var nested_effects = option.get("effects", [])
 		if typeof(nested_effects) != TYPE_ARRAY or nested_effects.size() != 1:
-			return false
+			return 0
 		var nested_effect = nested_effects[0]
 		if typeof(nested_effect) != TYPE_DICTIONARY:
-			return false
+			return 0
 		if str(nested_effect.get("type", "")) != "gain_influence":
-			return false
-		if int(nested_effect.get("amount", 0)) != 1:
-			return false
+			return 0
+		var amount := int(nested_effect.get("amount", 0))
+		if amount <= 0:
+			return 0
+		if detected_amount < 0:
+			detected_amount = amount
+		elif detected_amount != amount:
+			return 0
 		var faction_id := str(nested_effect.get("faction", ""))
 		if not expected_factions.has(faction_id):
-			return false
-	return true
+			return 0
+	return maxi(detected_amount, 0)
+
+static func is_influence_choice(effect: Dictionary) -> bool:
+	return get_influence_choice_amount(effect) > 0
 
 
 static func is_spice_refinery_trade_choice(effect: Dictionary) -> bool:
@@ -413,6 +431,73 @@ static func extract_sietch_tabr_choice(effect: Dictionary) -> Dictionary:
 		"second_shield_wall": second_shield_amount
 	}
 
+static func extract_high_council_seat_choice(effect: Dictionary) -> Dictionary:
+	var options_raw: Variant = effect.get("options", [])
+	if typeof(options_raw) != TYPE_ARRAY:
+		return {"ok": false}
+	var options: Array = options_raw
+	if options.size() != 2:
+		return {"ok": false}
+	var gain_solari := 0
+	var pay_solari := 0
+	var gain_found := false
+	var pay_found := false
+	for option_raw in options:
+		if typeof(option_raw) != TYPE_DICTIONARY:
+			return {"ok": false}
+		var option: Dictionary = option_raw
+		var effects_raw: Variant = option.get("effects", [])
+		if typeof(effects_raw) != TYPE_ARRAY:
+			return {"ok": false}
+		var effects: Array = effects_raw
+		if effects.size() == 1 and typeof(effects[0]) == TYPE_DICTIONARY:
+			var only_effect: Dictionary = effects[0]
+			if str(only_effect.get("type", "")) == "gain_resource" and str(only_effect.get("resource", "")) == "solari":
+				gain_solari = int(only_effect.get("amount", 0))
+				gain_found = gain_solari > 0
+				continue
+		if effects.size() == 2 and typeof(effects[0]) == TYPE_DICTIONARY and typeof(effects[1]) == TYPE_DICTIONARY:
+			var spend_effect: Dictionary = effects[0]
+			var conditional: Dictionary = effects[1]
+			if str(spend_effect.get("type", "")) != "spend_resource":
+				continue
+			if str(spend_effect.get("resource", "")) != "solari":
+				continue
+			if str(conditional.get("type", "")) != "if":
+				continue
+			var req_raw: Variant = conditional.get("requirement", {})
+			if typeof(req_raw) != TYPE_DICTIONARY:
+				continue
+			var req: Dictionary = req_raw
+			if str(req.get("type", "")) != "flag":
+				continue
+			if str(req.get("key", "")) != "has_high_council_seat":
+				continue
+			if bool(req.get("value", true)):
+				continue
+			var then_raw: Variant = conditional.get("then", [])
+			if typeof(then_raw) != TYPE_ARRAY:
+				continue
+			var then_effects: Array = then_raw
+			if then_effects.size() != 1 or typeof(then_effects[0]) != TYPE_DICTIONARY:
+				continue
+			var set_flag_effect: Dictionary = then_effects[0]
+			if str(set_flag_effect.get("type", "")) != "set_flag":
+				continue
+			if str(set_flag_effect.get("key", "")) != "has_high_council_seat":
+				continue
+			if not bool(set_flag_effect.get("value", false)):
+				continue
+			pay_solari = int(spend_effect.get("amount", 0))
+			pay_found = pay_solari > 0
+	if not gain_found or not pay_found:
+		return {"ok": false}
+	return {
+		"ok": true,
+		"gain_solari": gain_solari,
+		"pay_solari": pay_solari
+	}
+
 
 # --- Card face text (matches former CardVisuals._effect_to_text paths) ---
 
@@ -538,6 +623,11 @@ static func requirement_to_text_card(requirement_raw: Variant) -> String:
 			return "discarded card has %s tag" % str(requirement.get("tag", "required"))
 		"min_influence":
 			return "influence(%s) >= %d" % [str(requirement.get("faction", "")), int(requirement.get("value", 0))]
+		"has_alliance":
+			var faction_id := str(requirement.get("faction", ""))
+			if faction_id == "":
+				return "have alliance"
+			return "[faction_icon:%s] alliance" % faction_id
 		"flag":
 			return "%s == %s" % [str(requirement.get("key", "")), str(requirement.get("value", false))]
 		_:
@@ -590,7 +680,7 @@ static func effect_to_text_card(effect: Dictionary) -> String:
 	if effect_type == "gain_influence":
 		var faction := str(effect.get("faction", "faction"))
 		if faction == "anyone":
-			return "[influence_icon]"
+			return _anyone_influence_icon_token(amount)
 		return repeat_effect_token("[faction_icon:%s]" % faction, max(amount, 1))
 	if effect_type == "lose_influence":
 		var lose_faction := str(effect.get("faction", "faction"))
@@ -654,11 +744,30 @@ static func effect_to_text_card(effect: Dictionary) -> String:
 	if effect_type == "choice":
 		var options_raw: Variant = effect.get("options", [])
 		if typeof(options_raw) == TYPE_ARRAY:
+			var high_council_choice := extract_high_council_seat_choice(effect)
+			if bool(high_council_choice.get("ok", false)):
+				return "[high_council_choice:gain%d:pay%d]" % [
+					int(high_council_choice.get("gain_solari", 0)),
+					int(high_council_choice.get("pay_solari", 0))
+				]
+			var influence_choice_amount := get_influence_choice_amount(effect)
+			if influence_choice_amount > 0:
+				return _anyone_influence_icon_token(influence_choice_amount)
+			var influence_choice_factions: Array[String] = []
 			var labels: Array[String] = []
 			for option in options_raw:
 				if typeof(option) != TYPE_DICTIONARY:
 					continue
 				var option_dict: Dictionary = option
+				var option_effects_raw: Variant = option_dict.get("effects", [])
+				if typeof(option_effects_raw) == TYPE_ARRAY:
+					var option_effects: Array = option_effects_raw
+					if option_effects.size() == 1 and typeof(option_effects[0]) == TYPE_DICTIONARY:
+						var single_effect: Dictionary = option_effects[0]
+						if str(single_effect.get("type", "")) == "gain_influence" and int(single_effect.get("amount", 0)) == 1:
+							var faction_id := str(single_effect.get("faction", ""))
+							if faction_id != "":
+								influence_choice_factions.append(faction_id)
 				var effects_text := effects_to_text_card_nested(option_dict.get("effects", []))
 				var label := effects_text
 				if label == "":
@@ -667,7 +776,14 @@ static func effect_to_text_card(effect: Dictionary) -> String:
 				if lower_label.begins_with("do not ") or lower_label == "no payment" or lower_label == "":
 					continue
 				labels.append(label)
+			if influence_choice_factions.size() >= 2:
+				return "[influence_choice_set:%s]" % ",".join(influence_choice_factions)
 			if not labels.is_empty():
 				return " OR ".join(labels)
 		return "or"
 	return effect_type
+
+static func _anyone_influence_icon_token(amount: int) -> String:
+	if amount <= 1:
+		return "[influence_icon]"
+	return "[influence2_icon]"

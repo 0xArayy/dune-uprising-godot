@@ -4,11 +4,16 @@
 [ext_resource type="PackedScene" path="res://scenes/card_visuals.tscn" id="2"]
 
 [node name="CardUI" type="Control"]
-custom_minimum_size = Vector2(144, 216)
+custom_minimum_size = Vector2(180, 252)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1")
 
 [node name="CardVisuals" parent="." instance=ExtResource("2")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2

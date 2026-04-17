@@ -9,7 +9,7 @@ const ROW_TEXT_ACTIVE := Color(0.95, 0.98, 1.0, 1.0)
 const FACE_DOWN_MODULATE := Color(0.62, 0.64, 0.68, 0.95)
 const FACE_UP_MODULATE := Color(0.93, 0.95, 1.0, 1.0)
 const OBJECTIVE_ICON_PATHS := {
-	"crysknife": "res://data/icons/Crysknife.png",
+	"crysknife": "res://data/icons/crysknife.png",
 	"desert_mouse": "res://data/icons/desert_mouse.png",
 	"ornithopter": "res://data/icons/ornithopter.png"
 }

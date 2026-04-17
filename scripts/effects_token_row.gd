@@ -4,6 +4,7 @@ class_name EffectsTokenRow
 # Renders the same effect token strings as BoardSpaceMarker.set_effects_text (icons + numeric badges).
 
 const INFLUENCE_ICON_TOKEN := "[influence_icon]"
+const INFLUENCE2_ICON_TOKEN := "[influence2_icon]"
 const CONTRACT_ICON_TOKEN := "[contract_icon]"
 const CONTROL_ICON_TOKEN := "[control_icon]"
 const CONTROL_ICON_TOKEN_PREFIX := "[control_icon:"
@@ -26,6 +27,7 @@ const SPICE_REFINERY_ROW0_TOKEN := "[spice_refinery_row0]"
 const SPICE_REFINERY_ROW1_TOKEN := "[spice_refinery_row1]"
 const GATHER_SUPPORT_TRADE_TOKEN := "[gather_support_trade]"
 const COST_TRADE_TOKEN_PREFIX := "[cost_trade:"
+const HIGH_COUNCIL_CHOICE_TOKEN_PREFIX := "[high_council_choice:"
 const GATHER_SUPPORT_ROW0_TOKEN := "[gather_support_row0]"
 const GATHER_SUPPORT_ROW1_TOKEN := "[gather_support_row1]"
 const SOLARI_BADGE_TOKEN_PREFIX := "[solari_badge:"
@@ -46,6 +48,7 @@ const SWORD_ICON_PATH := "res://data/icons/sword.png"
 const SAND_WORM_ICON_PATH := "res://data/icons/sand_worm.png"
 const SHIELD_WALL_ICON_PATH := "res://data/icons/shield_wall.png"
 const INFLUENCE_ICON_PATH := "res://data/icons/influence.png"
+const INFLUENCE2_ICON_PATH := "res://data/icons/influence2.png"
 const CONTRACT_ICON_PATH := "res://data/icons/contract.png"
 const CONTROL_ICON_PATH := "res://data/icons/control.png"
 const FREMEN_INFLUENCE_ICON_PATH := "res://data/icons/fremen_influnce.png"
@@ -65,12 +68,11 @@ static func populate(container: HBoxContainer, effects_text: String, icon_scale:
 	if container == null:
 		return
 	var strict_strip_mode := container.name == "AgentEffectTokens" or container.name == "RevealEffectTokens"
-	# Strict block geometry: allow shrinking content, never upscale.
-	icon_scale = clampf(icon_scale, 0.5, 1.0)
+	icon_scale = clampf(icon_scale, 0.72, 1.0)
 	for child in container.get_children():
-		child.queue_free()
-	# Keep a single row to avoid content changing parent strip geometry.
-	effects_text = effects_text.replace("\n", " ; ")
+		container.remove_child(child)
+		child.free()
+	effects_text = effects_text.replace("\n", " ")
 
 	var text_stripped := effects_text.strip_edges()
 	text_stripped = _strip_and_append_faction_icons(container, text_stripped, icon_scale)
@@ -119,6 +121,7 @@ static func populate(container: HBoxContainer, effects_text: String, icon_scale:
 		return
 
 	var has_influence_icon: bool = text_stripped.find(INFLUENCE_ICON_TOKEN) >= 0
+	var has_influence2_icon: bool = text_stripped.find(INFLUENCE2_ICON_TOKEN) >= 0
 	var has_contract_icon: bool = text_stripped.find(CONTRACT_ICON_TOKEN) >= 0
 	var has_spice_refinery_trade: bool = text_stripped.find(SPICE_REFINERY_TRADE_TOKEN) >= 0
 	var parsed_spy := _extract_token_count(text_stripped, SPY_ICON_TOKEN)
@@ -140,11 +143,13 @@ static func populate(container: HBoxContainer, effects_text: String, icon_scale:
 	var parsed_water := _extract_water_badge_value(str(parsed_spice.get("text", "")))
 	var parsed_troops := _extract_troops_badge_value(str(parsed_water.get("text", "")))
 	var parsed_cost_trades := _extract_cost_trades(str(parsed_troops.get("text", "")))
-	var parsed_control_icons := _extract_control_icons(str(parsed_cost_trades.get("text", "")))
+	var parsed_high_council_choice := _extract_high_council_choice(str(parsed_cost_trades.get("text", "")))
+	var parsed_control_icons := _extract_control_icons(str(parsed_high_council_choice.get("text", "")))
 	var parsed_influence_choice_set := _extract_influence_choice_set(str(parsed_control_icons.get("text", "")))
 	var parsed_single_influence_choice := _extract_single_influence_choice(str(parsed_influence_choice_set.get("text", "")))
 	var cleaned_text: String = str(parsed_single_influence_choice.get("text", ""))
 	cleaned_text = cleaned_text.replace(INFLUENCE_ICON_TOKEN, "")
+	cleaned_text = cleaned_text.replace(INFLUENCE2_ICON_TOKEN, "")
 	cleaned_text = cleaned_text.replace(CONTRACT_ICON_TOKEN, "")
 	cleaned_text = cleaned_text.replace(CONTROL_ICON_TOKEN, "")
 	cleaned_text = cleaned_text.replace(DRAW_CARD_ICON_TOKEN, "")
@@ -166,6 +171,8 @@ static func populate(container: HBoxContainer, effects_text: String, icon_scale:
 
 	if has_influence_icon:
 		_add_texture_icon(container, INFLUENCE_ICON_PATH, _scale_size(Vector2(34, 34), icon_scale))
+	if has_influence2_icon:
+		_add_texture_icon(container, INFLUENCE2_ICON_PATH, _scale_size(Vector2(34, 34), icon_scale))
 	if has_contract_icon:
 		_add_texture_icon(container, CONTRACT_ICON_PATH, _scale_size(Vector2(68, 34), icon_scale))
 	_add_repeat_icons(container, int(parsed_spy.get("count", 0)), SPY_ICON_PATH, _scale_size(Vector2(34, 34), icon_scale))
@@ -232,6 +239,13 @@ static func populate(container: HBoxContainer, effects_text: String, icon_scale:
 				int(trade.get("gain_amount", 0)),
 				icon_scale
 			))
+	if bool(parsed_high_council_choice.get("has_choice", false)):
+		container.add_child(_build_high_council_choice_box(
+			int(parsed_high_council_choice.get("gain_solari", 0)),
+			int(parsed_high_council_choice.get("pay_solari", 0)),
+			icon_scale,
+			strict_strip_mode
+		))
 	var control_entries: Variant = parsed_control_icons.get("entries", [])
 	if typeof(control_entries) == TYPE_ARRAY:
 		for _entry in control_entries:
@@ -265,12 +279,15 @@ static func populate(container: HBoxContainer, effects_text: String, icon_scale:
 	if bool(parsed_troops.get("has_badge", false)):
 		_add_numeric_badge(container, TROOPS_ICON_PATH, int(parsed_troops.get("amount", 0)), icon_scale)
 
-	if cleaned_text != "":
+	if cleaned_text != "" and not strict_strip_mode:
 		var remainder := Label.new()
 		remainder.text = cleaned_text
 		remainder.autowrap_mode = TextServer.AUTOWRAP_OFF
 		remainder.add_theme_font_size_override("font_size", int(round(12.0 * icon_scale)))
 		container.add_child(remainder)
+
+	if strict_strip_mode:
+		container.alignment = BoxContainer.ALIGNMENT_BEGIN
 
 
 static func build_gather_support_trade_box(icon_scale: float = 1.0) -> VBoxContainer:
@@ -346,6 +363,33 @@ static func _build_cost_trade_box(
 	var right := _build_trade_side(gain_type, gain_amount, icon_scale)
 	if right != null:
 		row.add_child(right)
+	return row
+
+static func _build_high_council_choice_box(
+	gain_solari: int,
+	pay_solari: int,
+	icon_scale: float = 1.0,
+	strict_strip_mode: bool = false
+) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 4)
+	row.add_child(_make_badge_pair(SOLARI_ICON_PATH, maxi(gain_solari, 1), icon_scale))
+	var or_label := Label.new()
+	or_label.text = "OR"
+	or_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	or_label.add_theme_font_size_override("font_size", int(round(11.0 * icon_scale)))
+	row.add_child(or_label)
+	row.add_child(_make_badge_pair(SOLARI_ICON_PATH, maxi(pay_solari, 1), icon_scale))
+	row.add_child(_texture_rect(ARROW_ICON_PATH, _scale_size(Vector2(18, 18), icon_scale)))
+	var text_label := Label.new()
+	if strict_strip_mode:
+		text_label.text = "High Council seat"
+	else:
+		text_label.text = "Take your seat on the High Council (if you haven't already)."
+	text_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	text_label.add_theme_font_size_override("font_size", int(round(11.0 * icon_scale)))
+	text_label.clip_text = strict_strip_mode
+	row.add_child(text_label)
 	return row
 
 static func _build_trade_side(kind: String, amount: int, icon_scale: float = 1.0) -> Control:
@@ -626,6 +670,44 @@ static func _extract_cost_trades(text: String) -> Dictionary:
 		"text": cleaned_text
 	}
 
+static func _extract_high_council_choice(text: String) -> Dictionary:
+	var cleaned_text := text
+	var token_start: int = cleaned_text.find(HIGH_COUNCIL_CHOICE_TOKEN_PREFIX)
+	if token_start < 0:
+		return {
+			"has_choice": false,
+			"gain_solari": 0,
+			"pay_solari": 0,
+			"text": cleaned_text
+		}
+	var token_end: int = cleaned_text.find("]", token_start)
+	if token_end < 0:
+		return {
+			"has_choice": false,
+			"gain_solari": 0,
+			"pay_solari": 0,
+			"text": cleaned_text
+		}
+	var payload_start: int = token_start + HIGH_COUNCIL_CHOICE_TOKEN_PREFIX.length()
+	var payload: String = cleaned_text.substr(payload_start, token_end - payload_start)
+	var parts: PackedStringArray = payload.split(":", false)
+	if parts.size() != 2:
+		return {
+			"has_choice": false,
+			"gain_solari": 0,
+			"pay_solari": 0,
+			"text": cleaned_text
+		}
+	var gain_solari := int(str(parts[0]).replace("gain", ""))
+	var pay_solari := int(str(parts[1]).replace("pay", ""))
+	cleaned_text = cleaned_text.substr(0, token_start) + cleaned_text.substr(token_end + 1)
+	return {
+		"has_choice": true,
+		"gain_solari": gain_solari,
+		"pay_solari": pay_solari,
+		"text": cleaned_text
+	}
+
 static func _extract_control_icons(text: String) -> Dictionary:
 	var cleaned_text := text
 	var entries: Array = []
@@ -790,11 +872,46 @@ static func _find_standalone_word(text: String, word: String) -> Dictionary:
 
 static func _scale_size(size: Vector2, icon_scale: float) -> Vector2:
 	var applied := clampf(icon_scale, 0.72, 1.0)
-	# Card effect strips use icon_scale < 1.0; apply additional compacting so
-	# mixed icon+text rows stay inside fixed strip heights.
+	# Keep a predictable footprint in dense rows.
 	if applied < 0.999:
-		applied *= 0.78
+		applied *= 0.8
 	return Vector2(maxf(1.0, size.x * applied), maxf(1.0, size.y * applied))
+
+static func _trim_to_single_line_budget(container: HBoxContainer) -> void:
+	if container == null:
+		return
+	var budget := container.size.x
+	if budget <= 0.0 and container.get_parent_control() != null:
+		budget = container.get_parent_control().size.x
+	if budget <= 0.0:
+		budget = 88.0
+	budget = maxf(42.0, budget)
+	while _measure_container_width(container) > budget and container.get_child_count() > 0:
+		var last := container.get_child(container.get_child_count() - 1)
+		container.remove_child(last)
+		last.free()
+
+static func _measure_container_width(container: HBoxContainer) -> float:
+	var total := 0.0
+	var sep := float(container.get_theme_constant("separation"))
+	for idx in range(container.get_child_count()):
+		var child := container.get_child(idx)
+		total += _measure_node_width(child)
+		if idx < container.get_child_count() - 1:
+			total += sep
+	return total
+
+static func _measure_node_width(node: Node) -> float:
+	if node is Control:
+		var control := node as Control
+		if control.custom_minimum_size.x > 0.0:
+			return control.custom_minimum_size.x
+		if control.size.x > 0.0:
+			return control.size.x
+		if control is Label:
+			var label := control as Label
+			return maxf(float(label.text.length()) * 6.0, 10.0)
+	return 10.0
 
 
 static func _resolve_faction_icon_path(faction: String) -> String:

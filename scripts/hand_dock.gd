@@ -3,7 +3,7 @@ class_name HandDock
 
 ## Bottom strip reserved for layout (GameRoot scales the board using this, not expanded height).
 @export var collapsed_height: float = 45.0
-@export var expanded_height: float = 240.0
+@export var expanded_height: float = 268.0
 ## Cursor within this many pixels from the bottom of the viewport expands the dock.
 @export var bottom_hover_px: float = 78.0
 @export var tween_duration: float = 0.18

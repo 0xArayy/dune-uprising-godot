@@ -43,7 +43,7 @@ const SPY_GEOMETRIC_MEDIAN_EPSILON := 0.001
 const SHIELD_WALL_START_TEXTURE := preload("res://data/icons/shield_wall_start.png")
 const SHIELD_WALL_DESTROYED_TEXTURE := preload("res://data/icons/shield_wall_destroyed.png")
 const BATTLE_ICON_TEXTURE_PATHS := {
-	"crysknife": "res://data/icons/Crysknife.png",
+	"crysknife": "res://data/icons/crysknife.png",
 	"desert_mouse": "res://data/icons/desert_mouse.png",
 	"ornithopter": "res://data/icons/ornithopter.png"
 }
@@ -2621,7 +2621,7 @@ func _requirement_to_text(requirement: Variant) -> String:
 	return EffectTextTokensScript.requirement_to_text_board(requirement)
 
 func _is_influence_choice(effect: Dictionary) -> bool:
-	return EffectTextTokensScript.is_influence_choice(effect)
+	return EffectTextTokensScript.get_influence_choice_amount(effect) > 0
 
 func _is_spice_refinery_trade_choice(effect: Dictionary) -> bool:
 	return EffectTextTokensScript.is_spice_refinery_trade_choice(effect)
